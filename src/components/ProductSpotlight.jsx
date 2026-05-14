@@ -139,7 +139,6 @@ export default function ProductSpotlight() {
                 y: -4,
               }}
             >
-              <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{f.icon}</div>
               <img
                 src={f.icon}
                 alt={f.label}
@@ -148,6 +147,7 @@ export default function ProductSpotlight() {
                   height: '32px',
                   objectFit: 'contain',
                   marginBottom: '0.75rem',
+                  display: 'block',
                   filter: 'brightness(0) invert(1)',
                 }}
               />
