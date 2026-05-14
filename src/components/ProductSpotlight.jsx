@@ -3,10 +3,10 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 const features = [
-  { icon: '⚡', label: 'Real-time sync', desc: 'Sub-second data across every workstation' },
-  { icon: '🔒', label: 'ISO & GMP Ready', desc: 'Built-in compliance for regulated industries' },
-  { icon: '🌐', label: '18 Countries', desc: 'Deployed globally, maintained locally' },
-  { icon: '📱', label: 'Works Offline', desc: 'Operator UIs run without connectivity' },
+  { icon: '/icons/realtime.png', label: 'Real-time sync', desc: 'Sub-second data across every workstation' },
+  { icon: '/icons/lock.png', label: 'ISO & GMP Ready', desc: 'Built-in compliance for regulated industries' },
+  { icon: '/icons/globe.png', label: '18 Countries', desc: 'Deployed globally, maintained locally' },
+  { icon: '/icons/offline.png', label: 'Works Offline', desc: 'Operator UIs run without connectivity' },
 ]
 
 export default function ProductSpotlight() {
@@ -140,6 +140,18 @@ export default function ProductSpotlight() {
               }}
             >
               <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{f.icon}</div>
+              <img
+                src={f.icon}
+                alt={f.label}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  objectFit: 'contain',
+                  marginBottom: '0.75rem',
+                  filter: 'brightness(0) invert(1)',
+                }}
+              />
+
               <div style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: '0.95rem',

@@ -88,8 +88,8 @@ function DashboardViz({ pillar }) {
             SFX9 · LIVE DASHBOARD
           </div>
           <div style={{
-            fontFamily: 'var(--font-ui)', fontSize: '1rem',
-            color: 'var(--text)', fontWeight: 600,
+            fontFamily: 'var(--font-heading)', fontSize: '1rem',
+            color: 'var(--text)', fontWeight: 700,
           }}>
             {title}
           </div>
@@ -245,7 +245,39 @@ export default function Platform() {
   return (
     <section id="platform" ref={sectionRef} style={{ background: 'var(--bg)', position: 'relative', minHeight: '900vh' }}>
 
-      {/* ── STICKY CONTAINER — starts at top: 64px ── */}
+      {/* ── HEADER — normal page flow, scrolls away ── */}
+      <div className="container" style={{ paddingTop: '6rem', paddingBottom: '3rem' }}>
+        <motion.div
+          ref={inViewRef}
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="section-label">PLATFORM</div>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+            fontWeight: 800,
+            color: 'var(--text)',
+            marginBottom: '0.75rem',
+            lineHeight: 1.1,
+          }}>
+            Six pillars of SFX9 intelligence
+          </h2>
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            color: 'var(--text-muted)',
+            maxWidth: '540px',
+            lineHeight: 1.6,
+            marginBottom: '0',
+            fontSize: '0.95rem'
+          }}>
+            Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* ── STICKY GRID — starts at top: 64px ── */}
       <div style={{
         position: 'sticky',
         top: '64px',
@@ -254,41 +286,7 @@ export default function Platform() {
         flexDirection: 'column',
         overflow: 'hidden',
         boxSizing: 'border-box',
-        paddingTop: '4rem',
       }}>
-        {/* ── STICKY HEADER ── */}
-        <div className="container" style={{ flexShrink: 0, padding: '0 2rem 2rem clamp(1rem, calc((100vw - 1280px)/2 + 2rem), 8rem)' }}>
-          <motion.div
-            ref={inViewRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="section-label">PLATFORM</div>
-            <h2 style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
-              fontWeight: 600,
-              color: 'var(--text)',
-              marginBottom: '0.75rem',
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-            }}>
-              Six pillars of SFX9 intelligence
-            </h2>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              color: 'var(--text-muted)',
-              maxWidth: '540px',
-              lineHeight: 1.6,
-              marginBottom: '0',
-              fontSize: '0.95rem'
-            }}>
-              Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
-            </p>
-          </motion.div>
-        </div>
-
         <div className="platform-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 1fr) minmax(380px, 1fr)',
@@ -336,14 +334,13 @@ export default function Platform() {
 
                     {/* Title */}
                     <h3 style={{
-                      fontFamily: 'var(--font-ui)',
+                      fontFamily: 'var(--font-heading)',
                       fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       color: isActive ? 'var(--text)' : 'var(--text-muted)',
                       marginBottom: '0.4rem',
                       transition: 'color 0.3s',
                       lineHeight: 1.2,
-                      letterSpacing: '-0.01em',
                     }}>
                       {pillar.title}
                     </h3>
