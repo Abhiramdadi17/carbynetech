@@ -246,7 +246,7 @@ export default function Platform() {
     <section id="platform" ref={sectionRef} style={{ background: 'var(--bg)', position: 'relative', minHeight: '900vh' }}>
 
       {/* ── HEADER — normal page flow, scrolls away ── */}
-      <div className="container" style={{ paddingTop: '6rem', paddingBottom: '3rem' }}>
+      <div className="container" style={{ paddingTop: '4rem', paddingBottom: '3rem' }}>
         <motion.div
           ref={inViewRef}
           initial={{ opacity: 0, y: 40 }}

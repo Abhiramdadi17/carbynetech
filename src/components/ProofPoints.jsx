@@ -31,7 +31,7 @@ export default function ProofPoints() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
   return (
-    <section className="section" style={{ background: 'var(--bg)', paddingBottom: '8rem' }}>
+    <section className="section" style={{ background: 'var(--bg)' }}>
       <div className="container">
         <motion.div
           ref={ref}

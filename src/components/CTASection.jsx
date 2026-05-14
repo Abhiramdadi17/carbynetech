@@ -8,7 +8,7 @@ export default function CTASection() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
   return (
-    <section id="cta" style={{ background: '#f5f5f0', padding: '7rem 0' }}>
+    <section id="cta" style={{ background: '#f5f5f0', padding: '4rem 0' }}>
       <div className="container">
         <motion.div
           ref={ref}

@@ -15,7 +15,7 @@ export default function ProductSpotlight() {
   return (
     <section style={{
       position: 'relative',
-      padding: '8rem 0',
+      padding: '4rem 0',
       background: 'var(--bg-card)',
       overflow: 'hidden',
     }}>
