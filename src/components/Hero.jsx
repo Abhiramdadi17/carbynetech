@@ -144,8 +144,8 @@ export default function Hero() {
           {/* Main headline */}
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
-            fontWeight: 800,
+            fontSize: 'clamp(3.5rem, 6vw, 6.5rem)',
+            fontWeight: 700,
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
             color: 'var(--text)',
@@ -223,7 +223,8 @@ export default function Hero() {
             >
               <Zap size={12} color="var(--accent-blue)" />
               <span style={{
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-ui)',
+                fontWeight: 500,
                 fontSize: '0.75rem',
                 color: 'var(--text)',
                 letterSpacing: '0.03em',

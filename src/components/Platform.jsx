@@ -88,8 +88,8 @@ function DashboardViz({ pillar }) {
             SFX9 · LIVE DASHBOARD
           </div>
           <div style={{
-            fontFamily: 'var(--font-heading)', fontSize: '1rem',
-            color: 'var(--text)', fontWeight: 700,
+            fontFamily: 'var(--font-ui)', fontSize: '1rem',
+            color: 'var(--text)', fontWeight: 600,
           }}>
             {title}
           </div>
@@ -267,11 +267,12 @@ export default function Platform() {
             <div className="section-label">PLATFORM</div>
             <h2 style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
-              fontWeight: 800,
+              fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
+              fontWeight: 600,
               color: 'var(--text)',
               marginBottom: '0.75rem',
               lineHeight: 1.1,
+              letterSpacing: '-0.02em',
             }}>
               Six pillars of SFX9 intelligence
             </h2>
@@ -335,13 +336,14 @@ export default function Platform() {
 
                     {/* Title */}
                     <h3 style={{
-                      fontFamily: 'var(--font-heading)',
+                      fontFamily: 'var(--font-ui)',
                       fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-                      fontWeight: 700,
+                      fontWeight: 600,
                       color: isActive ? 'var(--text)' : 'var(--text-muted)',
                       marginBottom: '0.4rem',
                       transition: 'color 0.3s',
                       lineHeight: 1.2,
+                      letterSpacing: '-0.01em',
                     }}>
                       {pillar.title}
                     </h3>
