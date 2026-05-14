@@ -57,7 +57,7 @@ export default function ProductSpotlight() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          style={{ textAlign: 'center', marginBottom: '4rem' }}
+          style={{ marginBottom: '4rem' }}
         >
           <div style={{
             display: 'inline-flex',
@@ -107,7 +107,6 @@ export default function ProductSpotlight() {
             color: 'var(--text-muted)',
             fontSize: '1.05rem',
             maxWidth: '520px',
-            margin: '0 auto',
             lineHeight: 1.7,
           }}>
             SFX9 is not a point solution. It is a complete manufacturing intelligence layer — integrating every discipline, every role, every data source into a single unified view.

@@ -15,7 +15,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          style={{ textAlign: 'center', marginBottom: '3rem' }}
+          style={{ marginBottom: '3rem' }}
         >
           <div style={{
             fontFamily: 'var(--font-mono)',
@@ -43,7 +43,6 @@ export default function CTASection() {
             fontSize: '1.1rem',
             color: '#4a5568',
             maxWidth: '500px',
-            margin: '0 auto',
             lineHeight: 1.7,
           }}>
             Join 18 countries of manufacturers who've eliminated paper, reduced defects, and unlocked real-time visibility with SFX9.
@@ -61,7 +60,6 @@ export default function CTASection() {
             borderRadius: '16px',
             padding: '3rem',
             maxWidth: '680px',
-            margin: '0 auto',
             boxShadow: '0 40px 80px rgba(0,0,0,0.15)',
           }}
         >
