@@ -23,7 +23,7 @@ export default function Footer() {
 
   return (
     <footer style={{ background: '#060810', borderTop: '1px solid var(--border)' }}>
-      <div className="container" style={{ paddingTop: '5rem', paddingBottom: '3rem' }}>
+      <div className="container" style={{ paddingTop: '8rem', paddingBottom: '3rem' }}>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}

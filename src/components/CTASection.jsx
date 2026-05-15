@@ -3,18 +3,17 @@ import React from 'react'
 export default function CTASection() {
   return (
     <section style={{
-      padding: '7rem 0 0 0',             // ← side padding = 0, let card go edge to edge
       background: '#E9E9E9',
+      padding: '7rem 2rem 0 2rem',
       position: 'relative',
-      overflow: 'hidden',                // ← clips any accidental overflow
     }}>
 
-      {/* Wrap only the headline + buttons in a container div */}
+      {/* Headline + buttons — centered, normal flow */}
       <div style={{
         maxWidth: '700px',
         margin: '0 auto',
         textAlign: 'center',
-        padding: '0 2rem 5rem',            // side padding here instead of on section
+        paddingBottom: '4rem',
       }}>
         {/* Headline */}
         <h2 style={{
@@ -103,19 +102,23 @@ export default function CTASection() {
         </div>
       </div>
 
-      {/* Dark overlapping card — sits at bottom, overlaps footer */}
+      {/* Floating card — overlaps footer using negative margin */}
       <div style={{
-        width: '100%',                      // full width — no maxWidth
-        margin: '0',                        // no auto centering
+        maxWidth: '1100px',              // constrained width — NOT full width
+        margin: '0 auto',               // centered
+        marginBottom: '-80px',          // ← THIS pulls it down into the footer
+        position: 'relative',
+        zIndex: 10,                     // sits above both section and footer
         background: '#1A1A1A',
-        borderRadius: '20px 20px 0 0',      // top corners only
-        padding: '3rem clamp(2rem, 8vw, 6rem)',  // responsive side padding instead
+        borderRadius: '20px',           // ALL corners rounded — it's a floating card
+        padding: '3rem 3.5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '2rem',
         flexWrap: 'wrap',
         boxSizing: 'border-box',
+        boxShadow: '0 40px 80px rgba(0,0,0,0.25)',  // shadow makes it feel elevated
       }}>
 
         {/* Left — text */}
