@@ -23,10 +23,8 @@ export default function CTASection() {
           fontWeight: 400,
           color: '#111111',
           lineHeight: 1.1,
-          whiteSpace: 'nowrap',
           letterSpacing: '-0.02em',
-          marginBottom: '1.5rem',
-          maxWidth: '700px',
+          whiteSpace: 'nowrap',
           margin: '0 auto 1.5rem',
         }}>
           Transform your manufacturing operations
