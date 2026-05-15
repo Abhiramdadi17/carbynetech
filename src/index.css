@@ -274,3 +274,8 @@ h3 {
   background: rgba(0, 194, 255, 0.25);
   color: #fff;
 }
+
+/* ============================================================
+   MOBILE OVERFLOW GUARD (additive — does not override above)
+   ============================================================ */
+* { box-sizing: border-box; }

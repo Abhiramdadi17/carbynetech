@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const kpis = [
   {
@@ -210,6 +211,7 @@ function KPIPanel({ kpi }) {
 export default function KPIIntelligence() {
   const [activeKPI, setActiveKPI] = useState(0)
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
     <section className="section" style={{ background: 'var(--bg)' }}>
@@ -244,18 +246,20 @@ export default function KPIIntelligence() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '220px 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : '220px 1fr',
           gap: '1.5rem',
           alignItems: 'start',
         }}>
           {/* Left: vertical category list */}
           <div style={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: isMobile ? 'row' : 'column',
             border: '1px solid var(--border)',
             borderRadius: '12px',
-            overflow: 'hidden',
+            overflow: isMobile ? 'auto' : 'hidden',
             background: 'var(--bg-card)',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
           }}>
             {kpis.map((kpi, i) => (
               <button
@@ -265,11 +269,15 @@ export default function KPIIntelligence() {
                   padding: '1rem 1.25rem',
                   background: activeKPI === i ? 'rgba(255,255,255,0.04)' : 'transparent',
                   border: 'none',
-                  borderLeft: `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`,
-                  borderBottom: i < kpis.length - 1 ? '1px solid var(--border)' : 'none',
+                  borderLeft: isMobile ? 'none' : `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`,
+                  borderBottom: isMobile
+                    ? `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`
+                    : (i < kpis.length - 1 ? '1px solid var(--border)' : 'none'),
                   textAlign: 'left',
                   cursor: 'pointer',
-                  transition: 'background 0.2s, border-left-color 0.2s',
+                  transition: 'background 0.2s, border-color 0.2s',
+                  flexShrink: isMobile ? 0 : undefined,
+                  whiteSpace: isMobile ? 'nowrap' : undefined,
                 }}
               >
                 <div style={{

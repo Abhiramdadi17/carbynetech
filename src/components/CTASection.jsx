@@ -1,10 +1,13 @@
 import React from 'react'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 export default function CTASection() {
+  const { isMobile } = useBreakpoint()
+
   return (
     <section style={{
       background: '#E9E9E9',
-      padding: '7rem 2rem 0 2rem',
+      padding: isMobile ? '4rem 1.25rem 0 1.25rem' : '7rem 2rem 0 2rem',
       paddingBottom: '70px',
       position: 'relative',
     }}>
@@ -24,7 +27,7 @@ export default function CTASection() {
           color: '#111111',
           lineHeight: 1.1,
           letterSpacing: '-0.02em',
-          whiteSpace: 'nowrap',
+          whiteSpace: isMobile ? 'normal' : 'nowrap',
           margin: '0 auto 1.5rem',
         }}>
           Transform your manufacturing operations
@@ -49,6 +52,8 @@ export default function CTASection() {
           gap: '1rem',
           justifyContent: 'center',
           flexWrap: 'wrap',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'center',
         }}>
           <a href="#contact" style={{
             fontFamily: 'var(--font-ui)',       // Space Grotesk
@@ -63,6 +68,9 @@ export default function CTASection() {
             background: 'transparent',
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
+            width: isMobile ? '100%' : 'auto',
+            maxWidth: isMobile ? '300px' : 'none',
+            textAlign: 'center',
           }}
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = '#111111'
@@ -88,6 +96,9 @@ export default function CTASection() {
             background: 'transparent',
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
+            width: isMobile ? '100%' : 'auto',
+            maxWidth: isMobile ? '300px' : 'none',
+            textAlign: 'center',
           }}
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = '#111111'
@@ -104,27 +115,29 @@ export default function CTASection() {
 
       {/* Card — absolutely positioned at the bottom edge of this section */}
       <div style={{
-        position: 'absolute',
-        bottom: '-70px',               // ← half its height, pulls it down to straddle boundary
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 'calc(100% - 4rem)',    // full width minus side margins
+        position: isMobile ? 'relative' : 'absolute',
+        bottom: isMobile ? undefined : '-70px',
+        left: isMobile ? undefined : '50%',
+        transform: isMobile ? undefined : 'translateX(-50%)',
+        width: isMobile ? '100%' : 'calc(100% - 4rem)',
         maxWidth: '1100px',
         zIndex: 10,
         background: '#1A1A1A',
         borderRadius: '20px',
-        padding: '2.5rem 3.5rem',
+        padding: isMobile ? '2rem 1.5rem' : '2.5rem 3.5rem',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'space-between',
         gap: '2rem',
         flexWrap: 'wrap',
         boxSizing: 'border-box',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+        margin: isMobile ? '0 auto' : undefined,
       }}>
 
         {/* Left — text */}
-        <div style={{ textAlign: 'left', flex: 1, minWidth: '260px' }}>
+        <div style={{ textAlign: 'left', flex: 1, minWidth: isMobile ? '0' : '260px' }}>
           <h3 style={{
             fontFamily: 'var(--font-heading)',   // Cormorant
             fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
@@ -152,6 +165,7 @@ export default function CTASection() {
           gap: '1.25rem',
           flexShrink: 0,
           flexWrap: 'wrap',
+          width: isMobile ? '100%' : 'auto',
         }}>
           {/* Primary pill button — white filled */}
           <button style={{
@@ -166,6 +180,7 @@ export default function CTASection() {
             cursor: 'pointer',
             transition: 'background 0.2s, transform 0.2s',
             whiteSpace: 'nowrap',
+            width: isMobile ? '100%' : 'auto',
           }}
             onMouseEnter={e => e.currentTarget.style.background = '#F0F0F0'}
             onMouseLeave={e => e.currentTarget.style.background = '#FFFFFF'}

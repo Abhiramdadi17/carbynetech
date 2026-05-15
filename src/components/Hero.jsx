@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap } from 'lucide-react'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const stats = [
   { label: '18 Countries', icon: '🌍' },
@@ -11,6 +12,7 @@ const stats = [
 ]
 
 export default function Hero() {
+  const { isMobile } = useBreakpoint()
 
   return (
     <section style={{
@@ -75,10 +77,12 @@ export default function Hero() {
         width: '100%',
         maxWidth: 'none',
         margin: '0',
-        paddingTop: '7rem',
+        paddingTop: isMobile ? '7rem' : '7rem',
         paddingBottom: '4rem',
-        paddingLeft: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
-        paddingRight: '2rem',
+        paddingLeft: isMobile
+          ? '1.25rem'
+          : 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+        paddingRight: isMobile ? '1.25rem' : '2rem',
       }}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -114,7 +118,7 @@ export default function Hero() {
           {/* Main headline */}
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(5rem, 10vw, 9rem)',
+            fontSize: isMobile ? 'clamp(2rem, 7.5vw, 2.6rem)' : 'clamp(5rem, 10vw, 9rem)',
             fontWeight: 700,
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
@@ -136,9 +140,9 @@ export default function Hero() {
           {/* Subtext */}
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+            fontSize: isMobile ? '0.92rem' : 'clamp(1rem, 1.5vw, 1.2rem)',
             color: 'var(--text-muted)',
-            maxWidth: '620px',
+            maxWidth: isMobile ? '100%' : '620px',
             lineHeight: 1.7,
             marginBottom: '2.5rem',
           }}>
@@ -146,11 +150,38 @@ export default function Hero() {
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
-            <a href="#cta" className="btn btn-primary" style={{ fontSize: '0.9rem', padding: '0.8rem 1.8rem' }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '1rem',
+            flexWrap: 'wrap',
+            marginBottom: '4rem',
+            width: isMobile ? '100%' : 'auto',
+          }}>
+            <a
+              href="#cta"
+              className="btn btn-primary"
+              style={{
+                fontSize: '0.9rem',
+                padding: '0.8rem 1.8rem',
+                width: isMobile ? '100%' : 'auto',
+                maxWidth: isMobile ? '320px' : 'none',
+                justifyContent: 'center',
+              }}
+            >
               Book a Demo <ArrowRight size={16} />
             </a>
-            <a href="#platform" className="btn btn-outline" style={{ fontSize: '0.9rem', padding: '0.8rem 1.8rem' }}>
+            <a
+              href="#platform"
+              className="btn btn-outline"
+              style={{
+                fontSize: '0.9rem',
+                padding: '0.8rem 1.8rem',
+                width: isMobile ? '100%' : 'auto',
+                maxWidth: isMobile ? '320px' : 'none',
+                justifyContent: 'center',
+              }}
+            >
               Explore Platform
             </a>
           </div>
@@ -162,7 +193,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
           style={{
-            display: 'flex',
+            display: isMobile ? 'grid' : 'flex',
+            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : undefined,
             gap: '0.75rem',
             flexWrap: 'wrap',
           }}

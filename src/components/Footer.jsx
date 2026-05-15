@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Linkedin, Twitter, Youtube, Github } from 'lucide-react'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const footerLinks = {
   'Quick Links': ['About Us', 'Our Story', 'Team', 'Careers', 'Press'],
@@ -19,9 +20,14 @@ const socialIcons = [
 
 export default function Footer() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
-    <footer style={{ background: '#060810', borderTop: '1px solid var(--border)', paddingTop: '110px' }}>
+    <footer style={{
+      background: '#060810',
+      borderTop: '1px solid var(--border)',
+      paddingTop: isMobile ? '100px' : '110px',
+    }}>
       <div className="container" style={{ paddingBottom: '3rem' }}>
         <motion.div
           ref={ref}
@@ -32,12 +38,12 @@ export default function Footer() {
           {/* Top row */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+            gridTemplateColumns: isMobile ? '1fr 1fr' : '1fr 1fr 1fr 1fr 1fr',
             gap: '2rem',
             marginBottom: '4rem',
           }}>
             {/* Brand column */}
-            <div style={{ gridColumn: '1' }}>
+            <div style={{ gridColumn: isMobile ? '1 / -1' : '1' }}>
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
                 <img
                   src="/newlogo.png"
@@ -139,7 +145,8 @@ export default function Footer() {
             borderTop: '1px solid var(--border)',
             paddingTop: '1.5rem',
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '1rem',
@@ -151,7 +158,7 @@ export default function Footer() {
             }}>
               © 2026 Carbyne Tech Ltd. All rights reserved. SFX9 is a registered trademark.
             </span>
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
               {['Privacy Policy', 'Terms of Use', 'Cookie Policy'].map(l => (
                 <a
                   key={l}

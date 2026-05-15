@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const pillars = [
   {
@@ -209,6 +210,7 @@ export default function Platform() {
   const clickTimeoutRef = useRef(null)
   const sectionRef = useRef(null)
   const { ref: inViewRef, inView } = useInView({ threshold: 0.05, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   const LEFT_PAD = 'clamp(1rem, calc((100vw - 1280px) / 2 + 2rem), 8rem)'
 
@@ -250,231 +252,342 @@ export default function Platform() {
     }, 3000)
   }
 
+  // ── SINGLE RETURN — sectionRef always attached so useScroll always tracks ──
+  // Desktop: minHeight 750vh + sticky grid (unchanged logic)
+  // Mobile: compact accordion, no sticky scroll
   return (
-    <section id="platform" ref={sectionRef} style={{
-      background: 'var(--bg)',
-      position: 'relative',
-      minHeight: '750vh',
-      paddingBottom: 0,
-      marginBottom: 0,
-    }}>
-
-      {/* ── HEADER ── */}
-      <div style={{
-        paddingTop: '5rem',
-        paddingBottom: '2.5rem',
-        paddingLeft: LEFT_PAD,
-        paddingRight: '2rem',
+    <section
+      id="platform"
+      ref={sectionRef}
+      style={isMobile ? {
+        background: 'var(--bg)',
+        padding: '4rem 1.25rem',
         position: 'relative',
-        zIndex: 1,
-      }}>
-        <motion.div
-          ref={inViewRef}
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <div className="section-label">— PLATFORM</div>
-          <h2 style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
-            fontWeight: 800,
-            color: 'var(--text)',
-            marginBottom: '0.75rem',
-            lineHeight: 1.1,
-            maxWidth: '600px',
-          }}>
-            Six pillars of SFX9 intelligence
-          </h2>
-          <p style={{
-            fontFamily: 'var(--font-body)',
-            color: 'var(--text-muted)',
-            fontSize: '0.95rem',
-            lineHeight: 1.6,
-            maxWidth: '480px',
-            marginBottom: '0',
-          }}>
-            Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
-          </p>
-        </motion.div>
-      </div>
+      } : {
+        background: 'var(--bg)',
+        position: 'relative',
+        minHeight: '750vh',
+        paddingBottom: 0,
+        marginBottom: 0,
+      }}
+    >
+      {isMobile ? (
+        // ── MOBILE ACCORDION ──
+        <>
+          <div style={{ marginBottom: '2.5rem' }}>
+            <div className="section-label">— PLATFORM</div>
+            <h2 style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(1.8rem, 6vw, 2.4rem)',
+              fontWeight: 800,
+              color: 'var(--text)',
+              lineHeight: 1.1,
+              marginBottom: '0.75rem',
+            }}>
+              Six pillars of SFX9 intelligence
+            </h2>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              color: 'var(--text-muted)',
+              fontSize: '0.9rem',
+              lineHeight: 1.6,
+            }}>
+              Every module is purpose-built to eliminate waste, enforce standards,
+              and surface insights that drive competitive advantage.
+            </p>
+          </div>
 
-      {/* ── STICKY GRID — starts at top: 64px ── */}
-      <div style={{
-        position: 'sticky',
-        top: '64px',
-        height: 'calc(100vh - 64px)',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        boxSizing: 'border-box',
-      }}>
-        <div className="platform-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(380px, 1fr)',
-          flex: 1,
-          minHeight: 0,
-          overflow: 'visible',
-          alignItems: 'start',
-        }}>
-          {/* Wrapper to clip the scrolling left column */}
-          <div style={{ overflow: 'hidden', position: 'relative', height: '100%' }}>
-            {/* LEFT — shifted using scroll progress */}
-              <motion.div
-                className="platform-left"
-                style={{
-                  height: 'auto',
-                  alignSelf: 'stretch',
-                  paddingTop: '1.5rem',
-                  paddingBottom: '10vh',
-                  paddingLeft: LEFT_PAD,
-                  paddingRight: '2rem',
-                  y: leftY,
-                }}
-              >
-              {pillars.map((pillar, i) => {
-                const isActive = displayedPillar === i
-                return (
-                  <div
-                    key={pillar.num}
-                    onClick={() => handlePillarClick(i)}
-                    style={{
-                      padding: '1rem 0 1rem 1.25rem',
-                      borderBottom: '1px solid var(--border)',
-                      borderLeft: `3px solid ${isActive ? 'var(--accent-blue)' : 'transparent'}`,
-                      cursor: 'pointer',
-                      transition: 'border-left-color 0.35s ease',
-                    }}
+          {pillars.map((pillar, i) => (
+            <div
+              key={i}
+              onClick={() => setActivePillar(i)}
+              style={{
+                borderBottom: '1px solid var(--border)',
+                borderLeft: i === activePillar
+                  ? '3px solid var(--accent-blue)'
+                  : '3px solid transparent',
+                padding: '1.25rem 1rem',
+                cursor: 'pointer',
+                transition: 'border-left-color 0.3s',
+              }}
+            >
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                color: i === activePillar ? 'var(--accent-blue)' : 'var(--text-muted)',
+                marginBottom: '0.3rem',
+              }}>
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <h3 style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: i === activePillar ? 'var(--text)' : 'var(--text-muted)',
+                margin: 0,
+              }}>
+                {pillar.title}
+              </h3>
+
+              <AnimatePresence>
+                {i === activePillar && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: 'hidden' }}
                   >
-                    {/* Number */}
-                    <div style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.68rem',
-                      letterSpacing: '0.12em',
-                      color: isActive ? 'var(--accent-blue)' : 'var(--text-muted)',
-                      marginBottom: '0.4rem',
-                      transition: 'color 0.3s',
+                    <p style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.875rem',
+                      color: 'var(--text-muted)',
+                      lineHeight: 1.7,
+                      margin: '0.75rem 0',
                     }}>
-                      {pillar.num}
+                      {pillar.desc}
+                    </p>
+                    <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                      {pillar.tags.map(tag => (
+                        <span key={tag} className="tag">{tag}</span>
+                      ))}
                     </div>
-
-                    {/* Title */}
-                    <h3 style={{
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-                      fontWeight: 700,
-                      color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                      marginBottom: '0.4rem',
-                      transition: 'color 0.3s',
-                      lineHeight: 1.2,
+                    <div style={{
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border)',
+                      borderRadius: '12px',
+                      padding: '1.25rem',
+                      marginBottom: '0.5rem',
                     }}>
-                      {pillar.title}
-                    </h3>
-
-                    {/* Description */}
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.p
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          style={{
-                            fontFamily: 'var(--font-body)',
-                            fontSize: '0.875rem',
-                            color: 'var(--text-muted)',
-                            lineHeight: 1.6,
-                            marginBottom: '0.8rem',
-                            maxWidth: '460px',
-                            overflow: 'hidden',
-                          }}
-                        >
-                          {pillar.desc}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-
-                    {/* Tags */}
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', overflow: 'hidden' }}
-                        >
-                          {pillar.tags.map(tag => (
-                            <span
-                              key={tag}
-                              className="tag"
-                              style={{
-                                borderColor: 'rgba(0,194,255,0.35)',
-                                color: 'var(--accent-blue)',
-                                background: 'rgba(0,194,255,0.06)',
-                              }}
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                )
-              })}
+                      <DashboardViz pillar={pillar} />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </>
+      ) : (
+        // ── DESKTOP STICKY SCROLL — entirely unchanged from original ──
+        <>
+          {/* ── HEADER ── */}
+          <div style={{
+            paddingTop: '5rem',
+            paddingBottom: '2.5rem',
+            paddingLeft: LEFT_PAD,
+            paddingRight: '2rem',
+            position: 'relative',
+            zIndex: 1,
+          }}>
+            <motion.div
+              ref={inViewRef}
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="section-label">— PLATFORM</div>
+              <h2 style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                fontWeight: 800,
+                color: 'var(--text)',
+                marginBottom: '0.75rem',
+                lineHeight: 1.1,
+                maxWidth: '600px',
+              }}>
+                Six pillars of SFX9 intelligence
+              </h2>
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                color: 'var(--text-muted)',
+                fontSize: '0.95rem',
+                lineHeight: 1.6,
+                maxWidth: '480px',
+                marginBottom: '0',
+              }}>
+                Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
+              </p>
             </motion.div>
           </div>
 
-          {/* RIGHT — sticky dashboard viz */}
+          {/* ── STICKY GRID — starts at top: 64px ── */}
           <div style={{
-            display: 'flex',
-            alignItems: 'flex-start',     // ← start, not center
-            justifyContent: 'center',
-            padding: '1rem 2rem 2rem 1rem',
-            overflow: 'visible',
-            minWidth: 0,
-            background: 'linear-gradient(135deg, var(--bg) 0%, rgba(15,18,24,0.8) 100%)',
             position: 'sticky',
-            top: '64px',                  // ← navbar height
+            top: '64px',
+            height: 'calc(100vh - 64px)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            boxSizing: 'border-box',
           }}>
-            <div style={{
-              width: '100%',
-              maxWidth: '460px',
-              minWidth: '320px',
-              minHeight: '480px',
-              boxSizing: 'border-box',
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
-              borderRadius: '16px',
-              padding: '1.75rem',
-              boxShadow: '0 0 60px rgba(0,194,255,0.07), 0 0 120px rgba(0,194,255,0.03), inset 0 1px 0 rgba(255,255,255,0.05)',
-              overflow: 'hidden',
-              position: 'relative',
+            <div className="platform-grid" style={{
+              display: 'grid',
+              gridTemplateColumns: 'minmax(0, 1fr) minmax(380px, 1fr)',
+              flex: 1,
+              minHeight: 0,
+              overflow: 'visible',
+              alignItems: 'start',
             }}>
-              {/* Top accent line */}
-              <div style={{
-                position: 'absolute',
-                top: 0, left: '20%', right: '20%', height: '1px',
-                background: `linear-gradient(90deg, transparent, ${pillars[displayedPillar].color}66, transparent)`,
-              }} />
-
-              <AnimatePresence mode="wait">
+              {/* Wrapper to clip the scrolling left column */}
+              <div style={{ overflow: 'hidden', position: 'relative', height: '100%' }}>
+                {/* LEFT — shifted using scroll progress */}
                 <motion.div
-                  key={displayedPillar}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
-                  style={{ height: '100%' }}
+                  className="platform-left"
+                  style={{
+                    height: 'auto',
+                    alignSelf: 'stretch',
+                    paddingTop: '1.5rem',
+                    paddingBottom: '10vh',
+                    paddingLeft: LEFT_PAD,
+                    paddingRight: '2rem',
+                    y: leftY,
+                  }}
                 >
-                  <DashboardViz pillar={pillars[displayedPillar]} />
+                  {pillars.map((pillar, i) => {
+                    const isActive = displayedPillar === i
+                    return (
+                      <div
+                        key={pillar.num}
+                        onClick={() => handlePillarClick(i)}
+                        style={{
+                          padding: '1rem 0 1rem 1.25rem',
+                          borderBottom: '1px solid var(--border)',
+                          borderLeft: `3px solid ${isActive ? 'var(--accent-blue)' : 'transparent'}`,
+                          cursor: 'pointer',
+                          transition: 'border-left-color 0.35s ease',
+                        }}
+                      >
+                        {/* Number */}
+                        <div style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.68rem',
+                          letterSpacing: '0.12em',
+                          color: isActive ? 'var(--accent-blue)' : 'var(--text-muted)',
+                          marginBottom: '0.4rem',
+                          transition: 'color 0.3s',
+                        }}>
+                          {pillar.num}
+                        </div>
+
+                        {/* Title */}
+                        <h3 style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                          fontWeight: 700,
+                          color: isActive ? 'var(--text)' : 'var(--text-muted)',
+                          marginBottom: '0.4rem',
+                          transition: 'color 0.3s',
+                          lineHeight: 1.2,
+                        }}>
+                          {pillar.title}
+                        </h3>
+
+                        {/* Description */}
+                        <AnimatePresence>
+                          {isActive && (
+                            <motion.p
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              style={{
+                                fontFamily: 'var(--font-body)',
+                                fontSize: '0.875rem',
+                                color: 'var(--text-muted)',
+                                lineHeight: 1.6,
+                                marginBottom: '0.8rem',
+                                maxWidth: '460px',
+                                overflow: 'hidden',
+                              }}
+                            >
+                              {pillar.desc}
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Tags */}
+                        <AnimatePresence>
+                          {isActive && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', overflow: 'hidden' }}
+                            >
+                              {pillar.tags.map(tag => (
+                                <span
+                                  key={tag}
+                                  className="tag"
+                                  style={{
+                                    borderColor: 'rgba(0,194,255,0.35)',
+                                    color: 'var(--accent-blue)',
+                                    background: 'rgba(0,194,255,0.06)',
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )
+                  })}
                 </motion.div>
-              </AnimatePresence>
+              </div>
+
+              {/* RIGHT — sticky dashboard viz */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'flex-start',     // ← start, not center
+                justifyContent: 'center',
+                padding: '1rem 2rem 2rem 1rem',
+                overflow: 'visible',
+                minWidth: 0,
+                background: 'linear-gradient(135deg, var(--bg) 0%, rgba(15,18,24,0.8) 100%)',
+                position: 'sticky',
+                top: '64px',                  // ← navbar height
+              }}>
+                <div style={{
+                  width: '100%',
+                  maxWidth: '460px',
+                  minWidth: '320px',
+                  minHeight: '480px',
+                  boxSizing: 'border-box',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '16px',
+                  padding: '1.75rem',
+                  boxShadow: '0 0 60px rgba(0,194,255,0.07), 0 0 120px rgba(0,194,255,0.03), inset 0 1px 0 rgba(255,255,255,0.05)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                }}>
+                  {/* Top accent line */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: '20%', right: '20%', height: '1px',
+                    background: `linear-gradient(90deg, transparent, ${pillars[displayedPillar].color}66, transparent)`,
+                  }} />
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={displayedPillar}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -16 }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ height: '100%' }}
+                    >
+                      <DashboardViz pillar={pillars[displayedPillar]} />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
 
       <style>{`
         .platform-left::-webkit-scrollbar { display: none; }

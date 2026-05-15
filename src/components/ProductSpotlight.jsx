@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const features = [
   { icon: '/icons/realtime.png', label: 'Real-time sync', desc: 'Sub-second data across every workstation' },
@@ -11,6 +12,7 @@ const features = [
 
 export default function ProductSpotlight() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
     <section style={{
@@ -116,7 +118,7 @@ export default function ProductSpotlight() {
         {/* Feature grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
           gap: '1rem',
         }}>
           {features.map((f, i) => (

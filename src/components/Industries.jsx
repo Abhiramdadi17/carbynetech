@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ArrowRight } from 'lucide-react'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const industries = [
   {
@@ -29,6 +30,7 @@ const industries = [
 function IndustryRow({ industry, index }) {
   const [hovered, setHovered] = useState(false)
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
     <motion.div
@@ -40,7 +42,8 @@ function IndustryRow({ industry, index }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'space-between',
         padding: '1.75rem 1.5rem',
         borderTop: '1px solid var(--border)',
@@ -70,13 +73,35 @@ function IndustryRow({ industry, index }) {
           fontWeight: 700,
           color: hovered ? 'var(--text)' : 'var(--text-muted)',
           transition: 'color 0.3s',
-          minWidth: '220px',
+          minWidth: isMobile ? 'auto' : '220px',
         }}>
           {industry.name}
         </h3>
 
         {/* Tags */}
-        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', flex: 1 }}>
+        {!isMobile && (
+          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', flex: 1 }}>
+            {industry.tags.map(tag => (
+              <span
+                key={tag}
+                className="tag"
+                style={hovered ? {
+                  borderColor: 'rgba(0,194,255,0.4)',
+                  color: 'var(--accent-blue)',
+                  background: 'rgba(0,194,255,0.07)',
+                  transition: 'all 0.3s',
+                } : { transition: 'all 0.3s' }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Tags on mobile — below name row */}
+      {isMobile && (
+        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
           {industry.tags.map(tag => (
             <span
               key={tag}
@@ -92,7 +117,7 @@ function IndustryRow({ industry, index }) {
             </span>
           ))}
         </div>
-      </div>
+      )}
 
       {/* CTA */}
       <motion.button
@@ -113,6 +138,9 @@ function IndustryRow({ industry, index }) {
           whiteSpace: 'nowrap',
           transition: 'border-color 0.3s, color 0.3s, box-shadow 0.3s',
           boxShadow: hovered ? '0 0 15px rgba(0,194,255,0.2)' : 'none',
+          width: isMobile ? '100%' : 'auto',
+          justifyContent: isMobile ? 'center' : 'flex-start',
+          marginTop: isMobile ? '0.75rem' : 0,
         }}
       >
         Configure Solution <ArrowRight size={12} />

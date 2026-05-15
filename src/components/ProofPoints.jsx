@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const testimonials = [
   {
@@ -29,6 +30,7 @@ const testimonials = [
 export default function ProofPoints() {
   const [hoveredCard, setHoveredCard] = useState(null)
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
     <section className="section" style={{ background: 'var(--bg)' }}>
@@ -54,7 +56,7 @@ export default function ProofPoints() {
 
         <div className="proof-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
           gap: '1.25rem',
         }}>
           {testimonials.map((t, i) => {

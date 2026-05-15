@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const layers = [
   {
@@ -39,6 +40,7 @@ const badges = ['ISO & GMP Compliant', 'Security by Default', 'Local IT Ready']
 
 export default function Architecture() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   return (
     <section className="section" style={{
@@ -97,7 +99,8 @@ export default function Architecture() {
               className="arch-row"
               style={{
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: isMobile ? 'flex-start' : 'center',
+                flexWrap: isMobile ? 'wrap' : 'nowrap',
                 gap: '2rem',
                 padding: '1.5rem 0',
                 borderTop: '1px solid #DDD9D3',
@@ -117,7 +120,7 @@ export default function Architecture() {
               }} className="arch-num">
                 {layer.num}
               </span>
-              <div style={{ flex: '0 0 280px' }}>
+              <div style={{ flex: isMobile ? '1 1 auto' : '0 0 280px' }}>
                 <h3 style={{
                   fontFamily: 'var(--font-ui)',
                   fontSize: '1rem',
@@ -128,7 +131,14 @@ export default function Architecture() {
                   {layer.name}
                 </h3>
               </div>
-              <div style={{ flex: 1, display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                gap: '0.4rem',
+                flexWrap: 'wrap',
+                width: isMobile ? '100%' : 'auto',
+                marginTop: isMobile ? '0.5rem' : 0,
+              }}>
                 {layer.tags.map(tag => (
                   <span key={tag} className="tag arch-tag">{tag}</span>
                 ))}
@@ -145,6 +155,7 @@ export default function Architecture() {
           transition={{ duration: 0.5, delay: 0.6 }}
           style={{
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             gap: '1rem',
             flexWrap: 'wrap',
             marginTop: '2rem',

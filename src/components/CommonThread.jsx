@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const tabs = [
   {
@@ -75,6 +76,7 @@ export default function CommonThread() {
   const [activeTab, setActiveTab] = useState(0)
   const [direction, setDirection] = useState(1)
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { isMobile } = useBreakpoint()
 
   const handleTab = (i) => {
     setDirection(i > activeTab ? 1 : -1)
@@ -113,6 +115,7 @@ export default function CommonThread() {
           marginBottom: 0,
           overflowX: 'auto',
           scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
         }}>
           {tabs.map((t, i) => (
             <button
@@ -130,6 +133,7 @@ export default function CommonThread() {
                 transition: 'color 0.2s, border-color 0.2s',
                 whiteSpace: 'nowrap',
                 fontWeight: activeTab === i ? 600 : 400,
+                flexShrink: isMobile ? 0 : 1,
               }}
             >
               {t.label}
@@ -158,9 +162,9 @@ export default function CommonThread() {
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
               style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '3rem',
-                padding: '2.5rem',
+                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                gap: isMobile ? '1.5rem' : '3rem',
+                padding: isMobile ? '1.5rem' : '2.5rem',
                 minHeight: '340px',
               }}
             >
@@ -209,78 +213,80 @@ export default function CommonThread() {
                 </div>
               </div>
 
-              {/* Right: abstract visual */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+              {/* Right: abstract visual (hidden on mobile to save space) */}
+              {!isMobile && (
                 <div style={{
-                  width: '100%',
-                  maxWidth: '320px',
-                  aspectRatio: '1',
-                  position: 'relative',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                  {/* Abstract circular viz */}
-                  <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
-                    {/* Outer ring */}
-                    <circle cx="100" cy="100" r="90" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.2" />
-                    <circle cx="100" cy="100" r="70" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.15" />
-                    <circle cx="100" cy="100" r="50" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.1" />
-                    {/* Progress arc */}
-                    <circle
-                      cx="100" cy="100" r="90"
-                      fill="none"
-                      stroke={tab.color}
-                      strokeWidth="3"
-                      strokeDasharray={`${2 * Math.PI * 90 * 0.78} ${2 * Math.PI * 90}`}
-                      strokeLinecap="round"
-                      transform="rotate(-90 100 100)"
-                      opacity="0.8"
-                    />
-                    {/* Center stat */}
-                    <text
-                      x="100" y="96"
-                      textAnchor="middle"
-                      fill={tab.color}
-                      fontSize="22"
-                      fontFamily="IBM Plex Mono"
-                      fontWeight="400"
-                    >
-                      {tab.stat.split(' ')[0]}
-                    </text>
-                    <text
-                      x="100" y="116"
-                      textAnchor="middle"
-                      fill="#6b7a90"
-                      fontSize="10"
-                      fontFamily="Inter"
-                    >
-                      {tab.stat.split(' ').slice(1).join(' ')}
-                    </text>
-                    {/* Dots on ring */}
-                    {[0, 60, 120, 180, 240, 300].map((deg, i) => {
-                      const rad = (deg - 90) * Math.PI / 180
-                      const x = 100 + 90 * Math.cos(rad)
-                      const y = 100 + 90 * Math.sin(rad)
-                      return (
-                        <circle key={i} cx={x} cy={y} r="3" fill={tab.color} opacity={i === 0 ? 1 : 0.3} />
-                      )
-                    })}
-                  </svg>
-                  {/* Glow */}
                   <div style={{
-                    position: 'absolute',
-                    inset: '20%',
-                    borderRadius: '50%',
-                    background: `radial-gradient(circle, ${tab.color}15 0%, transparent 70%)`,
-                    pointerEvents: 'none',
-                  }} />
+                    width: '100%',
+                    maxWidth: '320px',
+                    aspectRatio: '1',
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    {/* Abstract circular viz */}
+                    <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                      {/* Outer ring */}
+                      <circle cx="100" cy="100" r="90" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.2" />
+                      <circle cx="100" cy="100" r="70" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.15" />
+                      <circle cx="100" cy="100" r="50" fill="none" stroke={tab.color} strokeWidth="0.5" opacity="0.1" />
+                      {/* Progress arc */}
+                      <circle
+                        cx="100" cy="100" r="90"
+                        fill="none"
+                        stroke={tab.color}
+                        strokeWidth="3"
+                        strokeDasharray={`${2 * Math.PI * 90 * 0.78} ${2 * Math.PI * 90}`}
+                        strokeLinecap="round"
+                        transform="rotate(-90 100 100)"
+                        opacity="0.8"
+                      />
+                      {/* Center stat */}
+                      <text
+                        x="100" y="96"
+                        textAnchor="middle"
+                        fill={tab.color}
+                        fontSize="22"
+                        fontFamily="IBM Plex Mono"
+                        fontWeight="400"
+                      >
+                        {tab.stat.split(' ')[0]}
+                      </text>
+                      <text
+                        x="100" y="116"
+                        textAnchor="middle"
+                        fill="#6b7a90"
+                        fontSize="10"
+                        fontFamily="Inter"
+                      >
+                        {tab.stat.split(' ').slice(1).join(' ')}
+                      </text>
+                      {/* Dots on ring */}
+                      {[0, 60, 120, 180, 240, 300].map((deg, i) => {
+                        const rad = (deg - 90) * Math.PI / 180
+                        const x = 100 + 90 * Math.cos(rad)
+                        const y = 100 + 90 * Math.sin(rad)
+                        return (
+                          <circle key={i} cx={x} cy={y} r="3" fill={tab.color} opacity={i === 0 ? 1 : 0.3} />
+                        )
+                      })}
+                    </svg>
+                    {/* Glow */}
+                    <div style={{
+                      position: 'absolute',
+                      inset: '20%',
+                      borderRadius: '50%',
+                      background: `radial-gradient(circle, ${tab.color}15 0%, transparent 70%)`,
+                      pointerEvents: 'none',
+                    }} />
+                  </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
