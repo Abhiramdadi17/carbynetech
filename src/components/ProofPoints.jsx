@@ -129,7 +129,7 @@ export default function ProofPoints() {
                 </div>
 
                 {/* Quote */}
-                <p style={{
+                <p className="proof-quote" style={{
                   fontFamily: 'var(--font-heading)',
                   fontStyle: 'Space Grotesk',
                   fontSize: '1.3rem',
@@ -176,8 +176,9 @@ export default function ProofPoints() {
         @media (max-width: 900px) {
           .proof-grid { grid-template-columns: 1fr !important; }
         }
-        @media (max-width: 600px) {
-          .proof-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 768px) {
+          .proof-quote { font-size: 0.95rem !important; line-height: 1.6 !important; }
+          .proof-grid > div { margin-bottom: 0 !important; }
         }
       `}</style>
     </section>

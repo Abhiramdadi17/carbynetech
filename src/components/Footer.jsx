@@ -30,7 +30,7 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
         >
           {/* Top row */}
-          <div style={{
+          <div className="footer-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
             gap: '2rem',
@@ -42,6 +42,7 @@ export default function Footer() {
                 <img
                   src="/newlogo.png"
                   alt="Carbyne Tech"
+                  className="footer-logo"
                   style={{
                     height: '78px',
                     width: 'auto',
@@ -62,7 +63,7 @@ export default function Footer() {
                 The intelligent shop floor platform — trusted by manufacturers in 18 countries.
               </p>
               {/* Social icons */}
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+              <div className="footer-social" style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
                 {socialIcons.map(({ Icon, label }) => (
                   <a
                     key={label}
@@ -135,7 +136,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div style={{
+          <div className="footer-bottom-bar" style={{
             borderTop: '1px solid var(--border)',
             paddingTop: '1.5rem',
             display: 'flex',
@@ -151,7 +152,7 @@ export default function Footer() {
             }}>
               © 2026 Carbyne Tech Ltd. All rights reserved. SFX9 is a registered trademark.
             </span>
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <div className="footer-bottom-links" style={{ display: 'flex', gap: '1.5rem' }}>
               {['Privacy Policy', 'Terms of Use', 'Cookie Policy'].map(l => (
                 <a
                   key={l}
@@ -175,13 +176,27 @@ export default function Footer() {
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          footer .container > div > div:first-child {
+        @media (max-width: 768px) {
+          .footer-grid {
             grid-template-columns: 1fr 1fr !important;
           }
+          .footer-bottom-bar {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .footer-bottom-links {
+            justify-content: center !important;
+          }
+          .footer-logo {
+            height: 36px !important;
+          }
+          .footer-social {
+            margin-top: 1rem !important;
+          }
         }
-        @media (max-width: 600px) {
-          footer .container > div > div:first-child {
+        @media (max-width: 480px) {
+          .footer-grid {
             grid-template-columns: 1fr !important;
           }
         }

@@ -203,7 +203,169 @@ function DashboardViz({ pillar }) {
   )
 }
 
-export default function Platform() {
+// ─── MOBILE: accordion layout, no sticky scroll ───────────────────────────────
+function MobilePlatform() {
+  const [activePillar, setActivePillar] = useState(0)
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true })
+
+  return (
+    <section id="platform" style={{ background: 'var(--bg)', padding: '3rem 1.25rem' }}>
+
+      {/* Header */}
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7 }}
+        style={{ marginBottom: '2rem' }}
+      >
+        <div className="section-label">— PLATFORM</div>
+        <h2 style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'clamp(1.8rem, 7vw, 2.5rem)',
+          fontWeight: 800,
+          color: 'var(--text)',
+          marginBottom: '0.75rem',
+          lineHeight: 1.1,
+        }}>
+          Six pillars of SFX9 intelligence
+        </h2>
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          color: 'var(--text-muted)',
+          fontSize: '0.9rem',
+          lineHeight: 1.6,
+        }}>
+          Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
+        </p>
+      </motion.div>
+
+      {/* Accordion pillar list */}
+      <div>
+        {pillars.map((pillar, i) => {
+          const isActive = activePillar === i
+          return (
+            <div key={pillar.num}>
+              {/* Pillar row — always visible */}
+              <div
+                onClick={() => setActivePillar(isActive ? -1 : i)}
+                style={{
+                  padding: '1rem 0 1rem 1.25rem',
+                  borderTop: '1px solid var(--border)',
+                  borderLeft: `3px solid ${isActive ? 'var(--accent-blue)' : 'transparent'}`,
+                  cursor: 'pointer',
+                  transition: 'border-left-color 0.3s ease',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div style={{ flex: 1, paddingRight: '0.5rem' }}>
+                    <div style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.12em',
+                      color: isActive ? 'var(--accent-blue)' : 'var(--text-muted)',
+                      marginBottom: '0.3rem',
+                      transition: 'color 0.3s',
+                    }}>
+                      {pillar.num}
+                    </div>
+                    <h3 style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      color: isActive ? 'var(--text)' : 'var(--text-muted)',
+                      lineHeight: 1.2,
+                      transition: 'color 0.3s',
+                      margin: 0,
+                    }}>
+                      {pillar.title}
+                    </h3>
+                  </div>
+                  <span style={{
+                    color: isActive ? 'var(--accent-blue)' : 'var(--text-muted)',
+                    fontSize: '1.4rem',
+                    lineHeight: 1,
+                    transition: 'color 0.3s',
+                    flexShrink: 0,
+                    paddingTop: '0.4rem',
+                    fontWeight: 300,
+                  }}>
+                    {isActive ? '−' : '+'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Expanded content */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div style={{ paddingLeft: '1.25rem', paddingBottom: '1.5rem', paddingTop: '0.25rem' }}>
+                      <p style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '0.875rem',
+                        color: 'var(--text-muted)',
+                        lineHeight: 1.6,
+                        marginBottom: '0.8rem',
+                      }}>
+                        {pillar.desc}
+                      </p>
+
+                      <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                        {pillar.tags.map(tag => (
+                          <span key={tag} className="tag" style={{
+                            borderColor: 'rgba(0,194,255,0.35)',
+                            color: 'var(--accent-blue)',
+                            background: 'rgba(0,194,255,0.06)',
+                          }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Dashboard card */}
+                      <div style={{
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        borderRadius: '16px',
+                        padding: '1.5rem',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        boxShadow: `0 0 60px rgba(0,194,255,0.07), inset 0 1px 0 rgba(255,255,255,0.05)`,
+                      }}>
+                        <div style={{
+                          position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px',
+                          background: `linear-gradient(90deg, transparent, ${pillar.color}66, transparent)`,
+                        }} />
+                        <DashboardViz pillar={pillar} />
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )
+        })}
+        <div style={{ borderTop: '1px solid var(--border)' }} />
+      </div>
+
+      <style>{`
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 1; box-shadow: 0 0 4px currentColor; }
+          50% { opacity: 0.5; box-shadow: none; }
+        }
+      `}</style>
+    </section>
+  )
+}
+
+// ─── DESKTOP: existing sticky-scroll layout ───────────────────────────────────
+function DesktopPlatform() {
   const [activePillar, setActivePillar] = useState(0)
   const [clickedPillar, setClickedPillar] = useState(null)
   const clickTimeoutRef = useRef(null)
@@ -223,13 +385,11 @@ export default function Platform() {
     offset: ["start start", "end end"]
   })
 
-  // Map 0-1 scroll progress to 0-5 index
   const activePillarIndex = useTransform(scrollYProgress,
     [0, 0.10, 0.26, 0.42, 0.58, 0.74, 0.90, 1.0],
     [0, 0, 1, 2, 3, 4, 5, 5]
   )
 
-  // Calculate exact scroll distance needed to reveal all pillars
   const PILLAR_ROW_HEIGHT = 90
   const ACTIVE_ROW_EXTRA = 120
   const totalListHeight = pillars.length * PILLAR_ROW_HEIGHT + ACTIVE_ROW_EXTRA
@@ -299,7 +459,7 @@ export default function Platform() {
         </motion.div>
       </div>
 
-      {/* ── STICKY GRID — starts at top: 64px ── */}
+      {/* ── STICKY GRID ── */}
       <div style={{
         position: 'sticky',
         top: '64px',
@@ -317,21 +477,20 @@ export default function Platform() {
           overflow: 'visible',
           alignItems: 'start',
         }}>
-          {/* Wrapper to clip the scrolling left column */}
+          {/* Clip wrapper for scrolling left column */}
           <div style={{ overflow: 'hidden', position: 'relative', height: '100%' }}>
-            {/* LEFT — shifted using scroll progress */}
-              <motion.div
-                className="platform-left"
-                style={{
-                  height: 'auto',
-                  alignSelf: 'stretch',
-                  paddingTop: '1.5rem',
-                  paddingBottom: '10vh',
-                  paddingLeft: LEFT_PAD,
-                  paddingRight: '2rem',
-                  y: leftY,
-                }}
-              >
+            <motion.div
+              className="platform-left"
+              style={{
+                height: 'auto',
+                alignSelf: 'stretch',
+                paddingTop: '1.5rem',
+                paddingBottom: '10vh',
+                paddingLeft: LEFT_PAD,
+                paddingRight: '2rem',
+                y: leftY,
+              }}
+            >
               {pillars.map((pillar, i) => {
                 const isActive = displayedPillar === i
                 return (
@@ -346,7 +505,6 @@ export default function Platform() {
                       transition: 'border-left-color 0.35s ease',
                     }}
                   >
-                    {/* Number */}
                     <div style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.68rem',
@@ -358,7 +516,6 @@ export default function Platform() {
                       {pillar.num}
                     </div>
 
-                    {/* Title */}
                     <h3 style={{
                       fontFamily: 'var(--font-heading)',
                       fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
@@ -371,7 +528,6 @@ export default function Platform() {
                       {pillar.title}
                     </h3>
 
-                    {/* Description */}
                     <AnimatePresence>
                       {isActive && (
                         <motion.p
@@ -394,7 +550,6 @@ export default function Platform() {
                       )}
                     </AnimatePresence>
 
-                    {/* Tags */}
                     <AnimatePresence>
                       {isActive && (
                         <motion.div
@@ -405,15 +560,11 @@ export default function Platform() {
                           style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', overflow: 'hidden' }}
                         >
                           {pillar.tags.map(tag => (
-                            <span
-                              key={tag}
-                              className="tag"
-                              style={{
-                                borderColor: 'rgba(0,194,255,0.35)',
-                                color: 'var(--accent-blue)',
-                                background: 'rgba(0,194,255,0.06)',
-                              }}
-                            >
+                            <span key={tag} className="tag" style={{
+                              borderColor: 'rgba(0,194,255,0.35)',
+                              color: 'var(--accent-blue)',
+                              background: 'rgba(0,194,255,0.06)',
+                            }}>
                               {tag}
                             </span>
                           ))}
@@ -429,14 +580,14 @@ export default function Platform() {
           {/* RIGHT — sticky dashboard viz */}
           <div style={{
             display: 'flex',
-            alignItems: 'flex-start',     // ← start, not center
+            alignItems: 'flex-start',
             justifyContent: 'center',
             padding: '1rem 2rem 2rem 1rem',
             overflow: 'visible',
             minWidth: 0,
             background: 'linear-gradient(135deg, var(--bg) 0%, rgba(15,18,24,0.8) 100%)',
             position: 'sticky',
-            top: '64px',                  // ← navbar height
+            top: '64px',
           }}>
             <div style={{
               width: '100%',
@@ -452,7 +603,6 @@ export default function Platform() {
               overflow: 'hidden',
               position: 'relative',
             }}>
-              {/* Top accent line */}
               <div style={{
                 position: 'absolute',
                 top: 0, left: '20%', right: '20%', height: '1px',
@@ -482,10 +632,23 @@ export default function Platform() {
           0%, 100% { opacity: 1; box-shadow: 0 0 4px currentColor; }
           50% { opacity: 0.5; box-shadow: none; }
         }
-        @media (max-width: 900px) {
-          #platform .sticky-grid { grid-template-columns: 1fr !important; }
-        }
       `}</style>
     </section>
   )
+}
+
+// ─── MAIN EXPORT: detect mobile and render appropriate layout ─────────────────
+export default function Platform() {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth < 768
+  })
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
+
+  return isMobile ? <MobilePlatform /> : <DesktopPlatform />
 }

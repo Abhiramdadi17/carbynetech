@@ -105,7 +105,7 @@ function KPIPanel({ kpi }) {
         overflow: 'hidden',
       }}
     >
-      {/* Subtle corner glow */}
+      {/* Corner glow */}
       <div style={{
         position: 'absolute', top: 0, right: 0,
         width: '200px', height: '200px',
@@ -126,7 +126,7 @@ function KPIPanel({ kpi }) {
       </div>
 
       {/* Big number */}
-      <div style={{
+      <div className="kpi-big-number" style={{
         fontFamily: 'var(--font-mono)',
         fontSize: 'clamp(3.5rem, 6vw, 5.5rem)',
         color: kpi.color,
@@ -161,7 +161,7 @@ function KPIPanel({ kpi }) {
             letterSpacing: '0.05em',
           }}>↑ IMPROVING</span>
         </div>
-        <div style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '52px' }}>
+        <div className="kpi-sparkline" style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '52px' }}>
           {kpi.sparkline.map((v, i) => {
             const maxV = Math.max(...kpi.sparkline)
             const heightPct = Math.max(8, (v / maxV) * 100)
@@ -210,6 +210,16 @@ function KPIPanel({ kpi }) {
 export default function KPIIntelligence() {
   const [activeKPI, setActiveKPI] = useState(0)
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth < 768
+  })
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
 
   return (
     <section className="section" style={{ background: 'var(--bg)' }}>
@@ -244,58 +254,92 @@ export default function KPIIntelligence() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '220px 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : '220px 1fr',
           gap: '1.5rem',
           alignItems: 'start',
         }}>
-          {/* Left: vertical category list */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            border: '1px solid var(--border)',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            background: 'var(--bg-card)',
-          }}>
-            {kpis.map((kpi, i) => (
-              <button
-                key={kpi.category}
-                onClick={() => setActiveKPI(i)}
-                style={{
-                  padding: '1rem 1.25rem',
-                  background: activeKPI === i ? 'rgba(255,255,255,0.04)' : 'transparent',
-                  border: 'none',
-                  borderLeft: `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`,
-                  borderBottom: i < kpis.length - 1 ? '1px solid var(--border)' : 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s, border-left-color 0.2s',
-                }}
-              >
-                <div style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: activeKPI === i ? 'var(--text)' : 'var(--text-muted)',
-                  transition: 'color 0.2s',
-                  marginBottom: '0.2rem',
-                }}>
+          {/* Tab navigation — vertical sidebar on desktop, horizontal scroll on mobile */}
+          {isMobile ? (
+            <div style={{
+              display: 'flex',
+              overflowX: 'auto',
+              scrollbarWidth: 'none',
+              borderBottom: '1px solid var(--border)',
+              marginBottom: '0.5rem',
+              WebkitOverflowScrolling: 'touch',
+            }}>
+              {kpis.map((kpi, i) => (
+                <button
+                  key={kpi.category}
+                  onClick={() => setActiveKPI(i)}
+                  style={{
+                    padding: '0.75rem 1.1rem',
+                    background: 'none',
+                    border: 'none',
+                    borderBottom: `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`,
+                    color: activeKPI === i ? 'var(--text)' : 'var(--text-muted)',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.85rem',
+                    fontWeight: activeKPI === i ? 600 : 400,
+                    flexShrink: 0,
+                    transition: 'color 0.2s, border-bottom-color 0.2s',
+                  }}
+                >
                   {kpi.category}
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
-                  color: activeKPI === i ? kpi.color : 'rgba(107,122,144,0.6)',
-                  transition: 'color 0.2s',
-                  letterSpacing: '0.03em',
-                }}>
-                  {kpi.prefix}{kpi.value}{kpi.unit}
-                </div>
-              </button>
-            ))}
-          </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              border: '1px solid var(--border)',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              background: 'var(--bg-card)',
+            }}>
+              {kpis.map((kpi, i) => (
+                <button
+                  key={kpi.category}
+                  onClick={() => setActiveKPI(i)}
+                  style={{
+                    padding: '1rem 1.25rem',
+                    background: activeKPI === i ? 'rgba(255,255,255,0.04)' : 'transparent',
+                    border: 'none',
+                    borderLeft: `3px solid ${activeKPI === i ? kpi.color : 'transparent'}`,
+                    borderBottom: i < kpis.length - 1 ? '1px solid var(--border)' : 'none',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border-left-color 0.2s',
+                  }}
+                >
+                  <div style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.875rem',
+                    fontWeight: 500,
+                    color: activeKPI === i ? 'var(--text)' : 'var(--text-muted)',
+                    transition: 'color 0.2s',
+                    marginBottom: '0.2rem',
+                  }}>
+                    {kpi.category}
+                  </div>
+                  <div style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.7rem',
+                    color: activeKPI === i ? kpi.color : 'rgba(107,122,144,0.6)',
+                    transition: 'color 0.2s',
+                    letterSpacing: '0.03em',
+                  }}>
+                    {kpi.prefix}{kpi.value}{kpi.unit}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
 
-          {/* Right: animated KPI panel */}
+          {/* KPI panel */}
           <AnimatePresence mode="wait">
             <KPIPanel key={activeKPI} kpi={kpis[activeKPI]} />
           </AnimatePresence>
@@ -303,8 +347,11 @@ export default function KPIIntelligence() {
       </div>
 
       <style>{`
+        .kpi-sparkline { width: 100% !important; }
         @media (max-width: 768px) {
-          .kpi-grid { grid-template-columns: 1fr !important; }
+          .kpi-big-number {
+            font-size: clamp(2.5rem, 12vw, 4rem) !important;
+          }
         }
       `}</style>
     </section>

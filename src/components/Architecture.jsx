@@ -107,28 +107,29 @@ export default function Architecture() {
                 transition: 'all 0.25s ease',
               }}
             >
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                fontWeight: '500',
-                color: '#1D4ED8',
-                minWidth: '36px',
-                transition: 'color 0.25s',
-              }} className="arch-num">
-                {layer.num}
-              </span>
-              <div style={{ flex: '0 0 280px' }}>
+              <div className="arch-num-name" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  fontWeight: '500',
+                  color: '#1D4ED8',
+                  minWidth: '36px',
+                  transition: 'color 0.25s',
+                }} className="arch-num">
+                  {layer.num}
+                </span>
                 <h3 style={{
                   fontFamily: 'var(--font-ui)',
                   fontSize: '1rem',
                   fontWeight: 600,
                   color: '#1A1F2E',
                   transition: 'color 0.25s',
+                  margin: 0,
                 }} className="arch-name">
                   {layer.name}
                 </h3>
               </div>
-              <div style={{ flex: 1, display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <div className="arch-tags-col" style={{ flex: 1, display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                 {layer.tags.map(tag => (
                   <span key={tag} className="tag arch-tag">{tag}</span>
                 ))}
@@ -143,6 +144,7 @@ export default function Architecture() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
+          className="arch-badges"
           style={{
             display: 'flex',
             gap: '1rem',
@@ -190,6 +192,33 @@ export default function Architecture() {
         .arch-row:hover .arch-tag {
           background: #DBEAFE !important;
           border-color: #93C5FD !important;
+        }
+        @media (max-width: 768px) {
+          .arch-row {
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+            padding-left: 0 !important;
+          }
+          .arch-row:hover {
+            padding-left: 0 !important;
+          }
+          .arch-num-name {
+            width: 100% !important;
+          }
+          .arch-tags-col {
+            width: 100% !important;
+            flex: none !important;
+          }
+          .arch-tag {
+            font-size: 0.55rem !important;
+            padding: 2px 7px !important;
+          }
+          .arch-badges {
+            flex-direction: column !important;
+          }
+          .arch-badges > div {
+            text-align: center !important;
+          }
         }
       `}</style>
     </section>

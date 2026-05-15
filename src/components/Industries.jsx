@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ArrowRight } from 'lucide-react'
@@ -26,7 +26,7 @@ const industries = [
   },
 ]
 
-function IndustryRow({ industry, index }) {
+function IndustryRow({ industry, index, isMobile }) {
   const [hovered, setHovered] = useState(false)
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
@@ -36,22 +36,30 @@ function IndustryRow({ industry, index }) {
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => !isMobile && setHovered(true)}
+      onMouseLeave={() => !isMobile && setHovered(false)}
       style={{
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'space-between',
-        padding: '1.75rem 1.5rem',
+        padding: isMobile ? '1.25rem 0' : '1.75rem 1.5rem',
         borderTop: '1px solid var(--border)',
         background: hovered ? 'var(--bg-hover)' : 'transparent',
         borderLeft: hovered ? '3px solid var(--accent-blue)' : '3px solid transparent',
         cursor: 'pointer',
         transition: 'background 0.3s, border-left-color 0.3s',
-        gap: '1.5rem',
+        gap: isMobile ? '0.75rem' : '1.5rem',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1 }}>
+      <div style={{
+        display: 'flex',
+        alignItems: isMobile ? 'flex-start' : 'center',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? '0.4rem' : '1.5rem',
+        flex: 1,
+        width: isMobile ? '100%' : 'auto',
+      }}>
         {/* Index */}
         <span style={{
           fontFamily: 'var(--font-mono)',
@@ -66,11 +74,12 @@ function IndustryRow({ industry, index }) {
         {/* Name */}
         <h3 style={{
           fontFamily: 'var(--font-heading)',
-          fontSize: 'clamp(1rem, 2vw, 1.4rem)',
+          fontSize: isMobile ? '1rem' : 'clamp(1rem, 2vw, 1.4rem)',
           fontWeight: 700,
           color: hovered ? 'var(--text)' : 'var(--text-muted)',
           transition: 'color 0.3s',
-          minWidth: '220px',
+          minWidth: isMobile ? 0 : '220px',
+          width: isMobile ? '100%' : 'auto',
         }}>
           {industry.name}
         </h3>
@@ -86,7 +95,11 @@ function IndustryRow({ industry, index }) {
                 color: 'var(--accent-blue)',
                 background: 'rgba(0,194,255,0.07)',
                 transition: 'all 0.3s',
-              } : { transition: 'all 0.3s' }}
+                fontSize: isMobile ? '0.58rem' : undefined,
+              } : {
+                transition: 'all 0.3s',
+                fontSize: isMobile ? '0.58rem' : undefined,
+              }}
             >
               {tag}
             </span>
@@ -96,7 +109,7 @@ function IndustryRow({ industry, index }) {
 
       {/* CTA */}
       <motion.button
-        animate={hovered ? { x: 0, opacity: 1 } : { x: 4, opacity: 0.4 }}
+        animate={{ x: 0, opacity: isMobile ? 1 : hovered ? 1 : 0.4 }}
         transition={{ duration: 0.2 }}
         style={{
           fontFamily: 'var(--font-mono)',
@@ -109,10 +122,13 @@ function IndustryRow({ industry, index }) {
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
           gap: '0.4rem',
           whiteSpace: 'nowrap',
           transition: 'border-color 0.3s, color 0.3s, box-shadow 0.3s',
           boxShadow: hovered ? '0 0 15px rgba(0,194,255,0.2)' : 'none',
+          width: isMobile ? '100%' : 'auto',
+          marginTop: isMobile ? '0.25rem' : 0,
         }}
       >
         Configure Solution <ArrowRight size={12} />
@@ -123,6 +139,16 @@ function IndustryRow({ industry, index }) {
 
 export default function Industries() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth < 768
+  })
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
 
   return (
     <section className="section" style={{ background: 'var(--bg)' }}>
@@ -155,10 +181,9 @@ export default function Industries() {
           </p>
         </motion.div>
 
-        {/* Industry rows */}
         <div>
           {industries.map((industry, i) => (
-            <IndustryRow key={industry.name} industry={industry} index={i} />
+            <IndustryRow key={industry.name} industry={industry} index={i} isMobile={isMobile} />
           ))}
           <div style={{ borderTop: '1px solid var(--border)' }} />
         </div>

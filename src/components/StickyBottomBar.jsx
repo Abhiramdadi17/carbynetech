@@ -9,7 +9,6 @@ export default function StickyBottomBar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past ~100vh
       setVisible(!dismissed && window.scrollY > window.innerHeight)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -36,7 +35,7 @@ export default function StickyBottomBar() {
             padding: '0.9rem 2rem',
           }}
         >
-          <div style={{
+          <div className="sticky-bar-inner" style={{
             maxWidth: '1280px',
             margin: '0 auto',
             display: 'flex',
@@ -46,7 +45,7 @@ export default function StickyBottomBar() {
             flexWrap: 'wrap',
           }}>
             {/* Text */}
-            <div>
+            <div className="sticky-bar-text">
               <span style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: '0.95rem',
@@ -66,8 +65,8 @@ export default function StickyBottomBar() {
             </div>
 
             {/* Input + button */}
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <div style={{
+            <div className="sticky-bar-actions" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <div className="sticky-bar-input" style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
@@ -95,7 +94,7 @@ export default function StickyBottomBar() {
               </div>
               <a
                 href="#cta"
-                className="btn btn-primary"
+                className="btn btn-primary sticky-bar-btn"
                 style={{ padding: '0.5rem 1.2rem', fontSize: '0.82rem' }}
               >
                 Book a Demo <ArrowRight size={14} />
@@ -135,6 +134,46 @@ export default function StickyBottomBar() {
               </button>
             </div>
           </div>
+
+          <style>{`
+            @media (max-width: 768px) {
+              .sticky-bar-inner {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.75rem !important;
+                padding: 0 !important;
+              }
+              .sticky-bar-text span:last-child {
+                display: block !important;
+                margin-left: 0 !important;
+                font-size: 0.82rem !important;
+              }
+              .sticky-bar-text span:first-child {
+                font-size: 0.82rem !important;
+              }
+              .sticky-bar-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.5rem !important;
+              }
+              .sticky-bar-input {
+                width: 100% !important;
+                box-sizing: border-box !important;
+              }
+              .sticky-bar-input input {
+                width: 100% !important;
+                flex: 1 !important;
+              }
+              .sticky-bar-btn {
+                width: 100% !important;
+                justify-content: center !important;
+              }
+              /* hide the dismiss X on mobile to save space — bar has limited room */
+              .sticky-bar-actions > button:last-child {
+                display: none !important;
+              }
+            }
+          `}</style>
         </motion.div>
       )}
     </AnimatePresence>

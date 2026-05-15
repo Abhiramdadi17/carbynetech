@@ -114,7 +114,7 @@ export default function ProductSpotlight() {
         </motion.div>
 
         {/* Feature grid */}
-        <div style={{
+        <div className="spotlight-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '1rem',
