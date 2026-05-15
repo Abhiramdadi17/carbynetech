@@ -132,8 +132,8 @@ export default function ProofPoints() {
                 <p style={{
                   fontFamily: 'var(--font-heading)',
                   fontStyle: 'italic',
-                  fontSize: '1rem',
-                  lineHeight: 1.7,
+                  fontSize: '1.05rem',
+                  lineHeight: 1.75,
                   color: isHovered ? '#1a1a1a' : 'rgba(255,255,255,0.75)',
                   marginBottom: '1.5rem',
                   transition: 'color 0.3s',
@@ -149,8 +149,8 @@ export default function ProofPoints() {
                 }}>
                   <div style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
+                    fontSize: '1rem',
+                    fontWeight: 700,
                     color: isHovered ? '#080a0d' : 'var(--text)',
                     transition: 'color 0.3s',
                   }}>
@@ -158,7 +158,7 @@ export default function ProofPoints() {
                   </div>
                   <div style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '0.78rem',
+                    fontSize: '0.82rem',
                     color: isHovered ? '#444' : 'var(--text-muted)',
                     marginTop: '0.2rem',
                     transition: 'color 0.3s',
