@@ -251,7 +251,13 @@ export default function Platform() {
   }
 
   return (
-    <section id="platform" ref={sectionRef} style={{ background: 'var(--bg)', position: 'relative', minHeight: '900vh' }}>
+    <section id="platform" ref={sectionRef} style={{
+      background: 'var(--bg)',
+      position: 'relative',
+      minHeight: '750vh',
+      paddingBottom: 0,
+      marginBottom: 0,
+    }}>
 
       {/* ── HEADER ── */}
       <div style={{
@@ -314,18 +320,18 @@ export default function Platform() {
           {/* Wrapper to clip the scrolling left column */}
           <div style={{ overflow: 'hidden', position: 'relative', height: '100%' }}>
             {/* LEFT — shifted using scroll progress */}
-            <motion.div
-              className="platform-left"
-              style={{
-                height: 'auto',
-                alignSelf: 'stretch',
-                paddingTop: '1.5rem',
-                paddingBottom: '30vh',
-                paddingLeft: LEFT_PAD,
-                paddingRight: '2rem',
-                y: leftY,
-              }}
-            >
+              <motion.div
+                className="platform-left"
+                style={{
+                  height: 'auto',
+                  alignSelf: 'stretch',
+                  paddingTop: '1.5rem',
+                  paddingBottom: '10vh',
+                  paddingLeft: LEFT_PAD,
+                  paddingRight: '2rem',
+                  y: leftY,
+                }}
+              >
               {pillars.map((pillar, i) => {
                 const isActive = displayedPillar === i
                 return (
