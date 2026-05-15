@@ -43,7 +43,7 @@ export default function Footer() {
                   src="/newlogo.png"
                   alt="Carbyne Tech"
                   style={{
-                    height: '48px',
+                    height: '78px',
                     width: 'auto',
                     objectFit: 'contain',
                     display: 'block',
