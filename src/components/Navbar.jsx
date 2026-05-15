@@ -72,9 +72,11 @@ export default function Navbar() {
             src="/newlogo.png"
             alt="Carbyne Tech"
             style={{
-              height: '36px',
+              height: '40px',
               width: 'auto',
               objectFit: 'contain',
+              display: 'block',
+              borderRadius: '4px',
             }}
           />
         </a>

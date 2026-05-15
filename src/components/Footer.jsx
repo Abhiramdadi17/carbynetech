@@ -46,6 +46,8 @@ export default function Footer() {
                     height: '48px',
                     width: 'auto',
                     objectFit: 'contain',
+                    display: 'block',
+                    borderRadius: '4px',
                   }}
                 />
               </a>
