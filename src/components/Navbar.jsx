@@ -30,9 +30,11 @@ export default function Navbar() {
       <nav id="main-nav" style={{
         position: 'fixed',
         top: '16px',                          // floats 16px from top — not flush
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 'min(calc(100% - 2rem), 1280px)',   // single clean rule
+        left: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+        right: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+        transform: 'none',
+        width: 'auto',
+        maxWidth: 'none',
         zIndex: 1000,
 
         // Glassmorphism pill
@@ -75,10 +77,10 @@ export default function Navbar() {
         <div className="desktop-nav" style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-end',
           gap: '0.1rem',
           flex: 1,
-          padding: '0 2rem',
+          paddingRight: '1.5rem',
         }}>
           {navLinks.map(link => (
             <a key={link} href={`#${link.toLowerCase()}`} style={{
@@ -160,9 +162,10 @@ export default function Navbar() {
             style={{
               position: 'fixed',
               top: '80px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: 'min(calc(100% - 2rem), 1280px)',
+              left: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+              right: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+              transform: 'none',
+              width: 'auto',
               background: 'rgba(8,10,13,0.98)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255,255,255,0.08)',
