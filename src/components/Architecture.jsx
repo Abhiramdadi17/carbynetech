@@ -41,7 +41,7 @@ export default function Architecture() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
   return (
-    <section className="section" style={{ background: 'var(--bg-card)' }}>
+    <section className="section" style={{ background: '#f5f5f0' }}>
       <div className="container">
         <motion.div
           ref={ref}
@@ -50,20 +50,31 @@ export default function Architecture() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: '3rem' }}
         >
-          <div className="section-label">INTEGRATION LAYER</div>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            letterSpacing: '0.2em',
+            color: '#6b7a90',
+            textTransform: 'uppercase',
+            marginBottom: '1rem',
+          }}>
+            INTEGRATION LAYER
+          </div>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+            fontSize: 'clamp(2.2rem, 5vw, 4rem)',
             fontWeight: 800,
-            color: 'var(--text)',
-            marginBottom: '1rem',
+            color: '#080a0d',
             lineHeight: 1.1,
+            letterSpacing: '-0.02em',
+            marginBottom: '1rem',
           }}>
             A connected platform,<br />layer by layer
           </h2>
           <p style={{
             fontFamily: 'var(--font-body)',
-            color: 'var(--text-muted)',
+            fontSize: '1.1rem',
+            color: '#4a5568',
             maxWidth: '520px',
             lineHeight: 1.7,
           }}>
@@ -85,7 +96,7 @@ export default function Architecture() {
                 alignItems: 'center',
                 gap: '2rem',
                 padding: '1.75rem 1.5rem',
-                borderTop: '1px solid var(--border)',
+                borderTop: '1px solid rgba(0,0,0,0.06)',
                 borderLeft: '3px solid transparent',
                 cursor: 'default',
                 transition: 'background 0.3s, border-left-color 0.3s',
@@ -94,7 +105,7 @@ export default function Architecture() {
               <span style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.7rem',
-                color: 'var(--text-muted)',
+                color: '#6b7a90',
                 minWidth: '28px',
                 transition: 'color 0.3s',
               }} className="arch-num">
@@ -105,7 +116,7 @@ export default function Architecture() {
                   fontFamily: 'var(--font-heading)',
                   fontSize: '1.05rem',
                   fontWeight: 700,
-                  color: 'var(--text-muted)',
+                  color: '#4a5568',
                   transition: 'color 0.3s',
                 }} className="arch-name">
                   {layer.name}
@@ -118,7 +129,7 @@ export default function Architecture() {
               </div>
             </motion.div>
           ))}
-          <div style={{ borderTop: '1px solid var(--border)' }} />
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }} />
         </div>
 
         {/* Bottom badges */}
@@ -139,11 +150,11 @@ export default function Architecture() {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.72rem',
-                color: 'var(--accent-blue)',
+                color: '#0066cc',
                 padding: '0.5rem 1rem',
-                border: '1px solid rgba(0,194,255,0.25)',
+                border: '1px solid rgba(0,102,204,0.25)',
                 borderRadius: '100px',
-                background: 'rgba(0,194,255,0.05)',
+                background: 'rgba(0,102,204,0.05)',
                 letterSpacing: '0.05em',
               }}
             >
@@ -154,20 +165,25 @@ export default function Architecture() {
       </div>
 
       <style>{`
+        .arch-tag {
+          background: rgba(0,0,0,0.03) !important;
+          border-color: rgba(0,0,0,0.08) !important;
+          color: #6b7a90 !important;
+        }
         .arch-row:hover {
-          background: var(--bg-hover);
-          border-left-color: var(--accent-blue) !important;
+          background: rgba(0,0,0,0.02);
+          border-left-color: #0066cc !important;
         }
         .arch-row:hover .arch-num {
-          color: var(--accent-blue) !important;
+          color: #0066cc !important;
         }
         .arch-row:hover .arch-name {
-          color: var(--text) !important;
+          color: #080a0d !important;
         }
         .arch-row:hover .arch-tag {
-          border-color: rgba(0,194,255,0.35) !important;
-          color: var(--accent-blue) !important;
-          background: rgba(0,194,255,0.07) !important;
+          border-color: rgba(0,102,204,0.35) !important;
+          color: #0066cc !important;
+          background: rgba(0,102,204,0.07) !important;
         }
       `}</style>
     </section>
