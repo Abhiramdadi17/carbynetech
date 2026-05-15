@@ -18,11 +18,12 @@ export default function CTASection() {
       }}>
         {/* Headline */}
         <h2 style={{
-          fontFamily: 'var(--font-heading)',   // Cormorant
-          fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
-          fontWeight: 400,                     // Cormorant looks best at regular weight large
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+          fontWeight: 400,
           color: '#111111',
           lineHeight: 1.1,
+          whiteSpace: 'nowrap',
           letterSpacing: '-0.02em',
           marginBottom: '1.5rem',
           maxWidth: '700px',
