@@ -131,8 +131,8 @@ export default function ProofPoints() {
                 {/* Quote */}
                 <p style={{
                   fontFamily: 'var(--font-heading)',
-                  fontStyle: 'italic',
-                  fontSize: '1.2rem',
+                  fontStyle: 'Space Grotesk',
+                  fontSize: '1.3rem',
                   lineHeight: 1.75,
                   color: isHovered ? '#000000ff' : 'rgba(255,255,255,0.75)',
                   marginBottom: '1.5rem',
