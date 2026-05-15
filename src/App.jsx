@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main>
+      <main style={{ paddingTop: '80px' }}>
         <Hero />
         <Platform />
         <Industries />
