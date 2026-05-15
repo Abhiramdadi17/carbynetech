@@ -148,7 +148,7 @@ export default function ProductSpotlight() {
                   objectFit: 'contain',
                   marginBottom: '0.75rem',
                   display: 'block',
-                  filter: 'brightness(0) invert(1)',
+                  filter: 'brightness(0) saturate(100%) invert(62%) sepia(97%) saturate(400%) hue-rotate(163deg) brightness(105%)',
                 }}
               />
 
