@@ -2,7 +2,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Linkedin, Twitter, Youtube, Github } from 'lucide-react'
-import Logo from './Logo'
 
 const footerLinks = {
   'Quick Links': ['About Us', 'Our Story', 'Team', 'Careers', 'Press'],
@@ -39,7 +38,17 @@ export default function Footer() {
           }}>
             {/* Brand column */}
             <div style={{ gridColumn: '1' }}>
-              <Logo size="md" />
+              <a href="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+                <img
+                  src="/newlogo.png"
+                  alt="Carbyne Tech"
+                  style={{
+                    height: '48px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                  }}
+                />
+              </a>
               <p style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.85rem',

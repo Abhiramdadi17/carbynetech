@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import Logo from './Logo'
 
 const navLinks = ['Services', 'Products', 'Insights & Events', 'Culture', 'Careers']
 
@@ -66,11 +65,18 @@ export default function Navbar() {
         <a href="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.5rem',
           textDecoration: 'none',
           flexShrink: 0,
         }}>
-          <Logo size="md" />
+          <img
+            src="/newlogo.png"
+            alt="Carbyne Tech"
+            style={{
+              height: '36px',
+              width: 'auto',
+              objectFit: 'contain',
+            }}
+          />
         </a>
 
         {/* CENTER — Nav links */}
