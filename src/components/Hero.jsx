@@ -115,9 +115,12 @@ export default function Hero() {
         position: 'relative',
         zIndex: 1,
         width: '100%',
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '7rem clamp(1rem, calc((100vw - 1280px) / 2 + 2rem), 8rem) 4rem',
+        maxWidth: 'none',
+        margin: '0',
+        paddingTop: '7rem',
+        paddingBottom: '4rem',
+        paddingLeft: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+        paddingRight: '2rem',
       }}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
