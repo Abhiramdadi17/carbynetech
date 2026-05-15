@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
@@ -205,8 +205,16 @@ function DashboardViz({ pillar }) {
 
 export default function Platform() {
   const [activePillar, setActivePillar] = useState(0)
+  const [clickedPillar, setClickedPillar] = useState(null)
+  const clickTimeoutRef = useRef(null)
   const sectionRef = useRef(null)
   const { ref: inViewRef, inView } = useInView({ threshold: 0.05, triggerOnce: true })
+
+  useEffect(() => {
+    return () => clearTimeout(clickTimeoutRef.current)
+  }, [])
+
+  const displayedPillar = clickedPillar !== null ? clickedPillar : activePillar
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -232,14 +240,12 @@ export default function Platform() {
     setActivePillar(Math.round(v))
   })
 
-  const scrollToPillar = (i) => {
-    if (!sectionRef.current) return
-    const rect = sectionRef.current.getBoundingClientRect()
-    const containerTop = rect.top + window.scrollY
-    const scrollableDistance = rect.height - window.innerHeight
-    // Prevent divide by zero, though pillars.length is 6
-    const target = containerTop + (i / (pillars.length - 1)) * scrollableDistance
-    window.scrollTo({ top: target, behavior: 'smooth' })
+  const handlePillarClick = (index) => {
+    setClickedPillar(index)
+    clearTimeout(clickTimeoutRef.current)
+    clickTimeoutRef.current = setTimeout(() => {
+      setClickedPillar(null)
+    }, 3000)
   }
 
   return (
@@ -307,11 +313,11 @@ export default function Platform() {
               }}
             >
               {pillars.map((pillar, i) => {
-                const isActive = activePillar === i
+                const isActive = displayedPillar === i
                 return (
                   <div
                     key={pillar.num}
-                    onClick={() => scrollToPillar(i)}
+                    onClick={() => handlePillarClick(i)}
                     style={{
                       padding: '1rem 0 1rem 1.25rem',
                       borderBottom: '1px solid var(--border)',
@@ -430,19 +436,19 @@ export default function Platform() {
               <div style={{
                 position: 'absolute',
                 top: 0, left: '20%', right: '20%', height: '1px',
-                background: `linear-gradient(90deg, transparent, ${pillars[activePillar].color}66, transparent)`,
+                background: `linear-gradient(90deg, transparent, ${pillars[displayedPillar].color}66, transparent)`,
               }} />
 
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activePillar}
+                  key={displayedPillar}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
                   style={{ height: '100%' }}
                 >
-                  <DashboardViz pillar={pillars[activePillar]} />
+                  <DashboardViz pillar={pillars[displayedPillar]} />
                 </motion.div>
               </AnimatePresence>
             </div>
