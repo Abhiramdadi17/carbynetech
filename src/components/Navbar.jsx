@@ -23,42 +23,41 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Prevent body scroll when menu open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
   return (
     <>
+      {/* NAVBAR wrapper — full width but content is constrained */}
       <nav id="main-nav" style={{
         position: 'fixed',
-        top: '16px',
+        top: '16px',                          // floats 16px from top — not flush
         left: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
         right: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
         transform: 'none',
         width: 'auto',
         maxWidth: 'none',
         zIndex: 1000,
+
+        // Glassmorphism pill
         background: 'rgba(8, 10, 13, 0.75)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '16px',
+        borderRadius: '16px',                 // pill/rounded rect shape
+
+        // Layout
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0.6rem 1.5rem',
         gap: '1rem',
         boxSizing: 'border-box',
+
+        // Subtle top highlight
         boxShadow: `
           0 1px 0 rgba(255,255,255,0.06) inset,
           0 20px 40px rgba(0,0,0,0.3)
         `,
+
+        // Smooth scroll transition
         transition: 'background 0.3s, box-shadow 0.3s',
       }}>
 
@@ -72,7 +71,6 @@ export default function Navbar() {
           <img
             src="/newlogo.png"
             alt="Carbyne Tech"
-            className="nav-logo"
             style={{
               height: '60px',
               width: 'auto',
@@ -83,7 +81,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* CENTER — Nav links (desktop) */}
+        {/* CENTER — Nav links */}
         <div className="desktop-nav" style={{
           display: 'flex',
           alignItems: 'center',
@@ -94,7 +92,7 @@ export default function Navbar() {
         }}>
           {navLinks.map(link => (
             <a key={link} href={`#${link.toLowerCase()}`} style={{
-              fontFamily: 'var(--font-ui)',
+              fontFamily: 'var(--font-ui)',   // Space Grotesk
               fontSize: '0.82rem',
               fontWeight: 500,
               color: 'rgba(255,255,255,0.65)',
@@ -117,13 +115,29 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* RIGHT — CTA Button (desktop) */}
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#ffffff',
+            cursor: 'pointer',
+            display: 'none',
+          }}
+          className="hamburger"
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* RIGHT — CTA Button */}
         <button className="desktop-cta" style={{
           fontFamily: 'var(--font-ui)',
           fontSize: '0.8rem',
           fontWeight: 600,
           color: '#080a0d',
-          background: '#00c2ff',
+          background: '#00c2ff',             // cyan fill — matches site accent
           border: 'none',
           borderRadius: '10px',
           padding: '0.5rem 1.1rem',
@@ -143,141 +157,78 @@ export default function Navbar() {
           Contact Us
         </button>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="hamburger"
-          style={{
-            background: 'none',
-            border: 'none',
-            color: '#ffffff',
-            cursor: 'pointer',
-            display: 'none',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '4px',
-            borderRadius: '6px',
-            flexShrink: 0,
-          }}
-          aria-label="Toggle menu"
-        >
-          <Menu size={24} />
-        </button>
-
       </nav>
 
-      {/* Fullscreen mobile menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
             style={{
               position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
+              top: '80px',
+              left: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+              right: 'clamp(1rem, calc((100vw - 1280px) / 2 + 1rem), 7rem)',
+              transform: 'none',
+              width: 'auto',
               background: 'rgba(8,10,13,0.98)',
               backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              zIndex: 1001,
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '16px',
+              zIndex: 999,
+              padding: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
-              padding: '5.5rem 2rem 2.5rem',
+              gap: '1rem',
             }}
           >
-            {/* Close button */}
-            <button
-              onClick={() => setMenuOpen(false)}
-              style={{
-                position: 'absolute',
-                top: '1.5rem',
-                right: '1.5rem',
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: '8px',
-                color: '#ffffff',
-                cursor: 'pointer',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              aria-label="Close menu"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Nav links */}
-            <div style={{ flex: 1 }}>
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, delay: i * 0.05 }}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    display: 'block',
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '1.2rem',
-                    fontWeight: 500,
-                    color: 'rgba(255,255,255,0.85)',
-                    textDecoration: 'none',
-                    padding: '1rem 0',
-                    borderBottom: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  {link}
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Contact Us at bottom */}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, delay: 0.3 }}
-              style={{
-                fontFamily: 'var(--font-ui)',
-                fontSize: '0.95rem',
-                fontWeight: 600,
-                color: '#080a0d',
-                background: '#00c2ff',
-                border: 'none',
-                borderRadius: '12px',
-                padding: '0.9rem',
-                cursor: 'pointer',
-                width: '100%',
-                marginTop: '1.5rem',
-                transition: 'background 0.2s',
-                minHeight: '44px',
-              }}
-            >
+            {navLinks.map(link => (
+              <a
+                key={link}
+                href="#"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '1rem',
+                  color: 'rgba(255,255,255,0.65)',
+                  textDecoration: 'none',
+                  padding: '0.5rem 0',
+                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                }}
+              >
+                {link}
+              </a>
+            ))}
+            <button style={{
+              fontFamily: 'var(--font-ui)',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              color: '#080a0d',
+              background: '#00c2ff',
+              border: 'none',
+              borderRadius: '10px',
+              padding: '0.75rem 1.1rem',
+              cursor: 'pointer',
+              marginTop: '0.5rem',
+              transition: 'background 0.2s',
+            }}>
               Contact Us
-            </motion.button>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .desktop-cta { display: none !important; }
           .hamburger { display: flex !important; }
           #main-nav {
-            left: 0.75rem !important;
-            right: 0.75rem !important;
+            width: calc(100% - 2rem) !important;
             padding: 0.5rem 1rem !important;
-            top: 12px !important;
-          }
-          .nav-logo {
-            height: 28px !important;
           }
         }
       `}</style>

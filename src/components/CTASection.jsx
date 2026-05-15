@@ -17,7 +17,7 @@ export default function CTASection() {
         paddingBottom: '4rem',
       }}>
         {/* Headline */}
-        <h2 className="cta-headline" style={{
+        <h2 style={{
           fontFamily: 'var(--font-heading)',
           fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
           fontWeight: 400,
@@ -32,7 +32,7 @@ export default function CTASection() {
 
         {/* Subtext */}
         <p style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: 'var(--font-body)',      // Inter
           fontSize: '0.95rem',
           color: '#666666',
           marginBottom: '2.5rem',
@@ -44,14 +44,14 @@ export default function CTASection() {
         </p>
 
         {/* Two outlined pill buttons */}
-        <div className="cta-buttons" style={{
+        <div style={{
           display: 'flex',
           gap: '1rem',
           justifyContent: 'center',
           flexWrap: 'wrap',
         }}>
-          <a href="#contact" className="cta-pill" style={{
-            fontFamily: 'var(--font-ui)',
+          <a href="#contact" style={{
+            fontFamily: 'var(--font-ui)',       // Space Grotesk
             fontSize: '0.72rem',
             fontWeight: 500,
             letterSpacing: '0.12em',
@@ -63,9 +63,6 @@ export default function CTASection() {
             background: 'transparent',
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
           }}
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = '#111111'
@@ -78,7 +75,7 @@ export default function CTASection() {
             CONTACT US
           </a>
 
-          <a href="#services" className="cta-pill" style={{
+          <a href="#services" style={{
             fontFamily: 'var(--font-ui)',
             fontSize: '0.72rem',
             fontWeight: 500,
@@ -91,9 +88,6 @@ export default function CTASection() {
             background: 'transparent',
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
           }}
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = '#111111'
@@ -108,13 +102,13 @@ export default function CTASection() {
         </div>
       </div>
 
-      {/* Dark floating card */}
-      <div className="cta-card" style={{
+      {/* Card — absolutely positioned at the bottom edge of this section */}
+      <div style={{
         position: 'absolute',
-        bottom: '-70px',
+        bottom: '-70px',               // ← half its height, pulls it down to straddle boundary
         left: '50%',
         transform: 'translateX(-50%)',
-        width: 'calc(100% - 4rem)',
+        width: 'calc(100% - 4rem)',    // full width minus side margins
         maxWidth: '1100px',
         zIndex: 10,
         background: '#1A1A1A',
@@ -132,7 +126,7 @@ export default function CTASection() {
         {/* Left — text */}
         <div style={{ textAlign: 'left', flex: 1, minWidth: '260px' }}>
           <h3 style={{
-            fontFamily: 'var(--font-heading)',
+            fontFamily: 'var(--font-heading)',   // Cormorant
             fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
             fontWeight: 400,
             color: '#FFFFFF',
@@ -142,7 +136,7 @@ export default function CTASection() {
             Transform your production visibility
           </h3>
           <p style={{
-            fontFamily: 'var(--font-body)',
+            fontFamily: 'var(--font-body)',      // Inter
             fontSize: '0.85rem',
             color: 'rgba(255,255,255,0.5)',
             lineHeight: 1.6,
@@ -152,15 +146,16 @@ export default function CTASection() {
         </div>
 
         {/* Right — buttons */}
-        <div className="cta-card-buttons" style={{
+        <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '1.25rem',
           flexShrink: 0,
           flexWrap: 'wrap',
         }}>
+          {/* Primary pill button — white filled */}
           <button style={{
-            fontFamily: 'var(--font-ui)',
+            fontFamily: 'var(--font-ui)',        // Space Grotesk
             fontSize: '0.88rem',
             fontWeight: 500,
             color: '#111111',
@@ -178,6 +173,7 @@ export default function CTASection() {
             Book a Consultant
           </button>
 
+          {/* Ghost text link */}
           <a href="#services" style={{
             fontFamily: 'var(--font-ui)',
             fontSize: '0.85rem',
@@ -198,41 +194,6 @@ export default function CTASection() {
         </div>
 
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .cta-headline {
-            white-space: normal !important;
-            font-size: clamp(1.6rem, 6vw, 2rem) !important;
-          }
-          .cta-buttons {
-            flex-direction: column !important;
-            align-items: stretch !important;
-          }
-          .cta-pill {
-            width: 100% !important;
-          }
-          .cta-card {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            padding: 2rem 1.5rem !important;
-            bottom: -60px !important;
-            border-radius: 16px 16px 0 0 !important;
-            width: calc(100% - 2rem) !important;
-          }
-          .cta-card-buttons {
-            width: 100% !important;
-            flex-direction: column !important;
-            align-items: stretch !important;
-            gap: 0.75rem !important;
-          }
-          .cta-card-buttons button,
-          .cta-card-buttons a {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }

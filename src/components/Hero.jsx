@@ -13,7 +13,7 @@ const stats = [
 export default function Hero() {
 
   return (
-    <section className="hero-section" style={{
+    <section style={{
       position: 'relative',
       minHeight: '100vh',
       display: 'flex',
@@ -30,7 +30,6 @@ export default function Hero() {
         loop
         playsInline
         preload="auto"
-        className="hero-video"
         style={{
           position: 'absolute',
           inset: 0,
@@ -70,7 +69,7 @@ export default function Hero() {
       }} />
 
       <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-      <div className="hero-container container" style={{
+      <div className="container" style={{
         position: 'relative',
         zIndex: 1,
         width: '100%',
@@ -113,7 +112,7 @@ export default function Hero() {
           </div>
 
           {/* Main headline */}
-          <h1 className="hero-headline" style={{
+          <h1 style={{
             fontFamily: 'var(--font-heading)',
             fontSize: 'clamp(5rem, 10vw, 9rem)',
             fontWeight: 700,
@@ -128,14 +127,14 @@ export default function Hero() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}><span className="hero-br"><br /></span>
+            }}><br />
               shop floor
             </span>
             {' '}platform
           </h1>
 
           {/* Subtext */}
-          <p className="hero-sub" style={{
+          <p style={{
             fontFamily: 'var(--font-body)',
             fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
             color: 'var(--text-muted)',
@@ -147,7 +146,7 @@ export default function Hero() {
           </p>
 
           {/* CTA buttons */}
-          <div className="hero-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
             <a href="#cta" className="btn btn-primary" style={{ fontSize: '0.9rem', padding: '0.8rem 1.8rem' }}>
               Book a Demo <ArrowRight size={16} />
             </a>
@@ -159,7 +158,6 @@ export default function Hero() {
 
         {/* Stat pills */}
         <motion.div
-          className="hero-stats"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
@@ -224,40 +222,6 @@ export default function Hero() {
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.4; }
-        }
-
-        @media (max-width: 768px) {
-          .hero-container {
-            padding-top: 6rem !important;
-            padding-left: 1.25rem !important;
-            padding-right: 1.25rem !important;
-          }
-          .hero-video {
-            object-position: 60% center !important;
-          }
-          .hero-headline {
-            font-size: clamp(2.2rem, 8vw, 3rem) !important;
-          }
-          .hero-br {
-            display: none !important;
-          }
-          .hero-sub {
-            max-width: 100% !important;
-          }
-          .hero-buttons {
-            flex-direction: column !important;
-            gap: 0.75rem !important;
-          }
-          .hero-buttons a {
-            width: 100% !important;
-            justify-content: center !important;
-            box-sizing: border-box !important;
-          }
-          .hero-stats {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 0.5rem !important;
-          }
         }
       `}</style>
     </section>

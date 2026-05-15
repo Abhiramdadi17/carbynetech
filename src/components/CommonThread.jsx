@@ -156,8 +156,7 @@ export default function CommonThread() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-              className="thread-content-grid"
-            style={{
+              style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
                 gap: '3rem',
@@ -186,7 +185,7 @@ export default function CommonThread() {
                   {tab.subtext}
                 </p>
                 {/* Metrics */}
-                <div className="thread-metrics" style={{ display: 'flex', gap: '2rem' }}>
+                <div style={{ display: 'flex', gap: '2rem' }}>
                   {tab.metrics.map(m => (
                     <div key={m.label}>
                       <div style={{
@@ -289,21 +288,7 @@ export default function CommonThread() {
 
       <style>{`
         @media (max-width: 768px) {
-          .thread-content-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
-            padding: 1.5rem !important;
-          }
-          .thread-content-grid > div:last-child {
-            display: none !important;
-          }
-          .thread-metrics {
-            flex-direction: column !important;
-            gap: 1rem !important;
-          }
-          .thread-metrics > div > div:first-child {
-            font-size: clamp(2rem, 10vw, 3rem) !important;
-          }
+          .thread-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
