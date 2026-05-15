@@ -132,7 +132,7 @@ export default function ProofPoints() {
                 <p style={{
                   fontFamily: 'var(--font-heading)',
                   fontStyle: 'italic',
-                  fontSize: '1.05rem',
+                  fontSize: '1.1rem',
                   lineHeight: 1.75,
                   color: isHovered ? '#1a1a1a' : 'rgba(255,255,255,0.75)',
                   marginBottom: '1.5rem',
