@@ -101,7 +101,7 @@ export default function ProofPoints() {
                 <div style={{ marginBottom: '1rem' }}>
                   <span style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '0.9rem',
+                    fontSize: '2rem',
                     fontWeight: 700,
                     color: isHovered ? '#080a0d' : 'var(--text)',
                     display: 'block',
@@ -111,7 +111,7 @@ export default function ProofPoints() {
                   </span>
                   <span style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.65rem',
+                    fontSize: '2rem',
                     color: isHovered ? 'rgba(0,194,255,0.8)' : 'var(--accent-blue)',
                     letterSpacing: '0.1em',
                     transition: 'color 0.3s',
@@ -123,7 +123,7 @@ export default function ProofPoints() {
                 {/* Quote */}
                 <p style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '1.1rem',
+                  fontSize: '2rem',
                   fontWeight: 400,
                   color: isHovered ? '#1a1a1a' : 'var(--text-muted)',
                   lineHeight: 1.7,
