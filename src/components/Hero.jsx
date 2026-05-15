@@ -79,6 +79,8 @@ export default function Hero() {
       alignItems: 'center',
       overflow: 'hidden',
       background: 'var(--bg)',
+      padding: '0',
+      textAlign: 'left',
     }}>
       {/* Grid background */}
       <div className="grid-bg" />
@@ -109,7 +111,14 @@ export default function Hero() {
         zIndex: 0,
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '7rem', paddingBottom: '4rem' }}>
+      <div className="container" style={{
+        position: 'relative',
+        zIndex: 1,
+        width: '100%',
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: '7rem clamp(1rem, calc((100vw - 1280px) / 2 + 2rem), 8rem) 4rem',
+      }}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,7 +158,6 @@ export default function Hero() {
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
             color: 'var(--text)',
-            maxWidth: '900px',
             marginBottom: '1.5rem',
           }}>
             The intelligent{' '}

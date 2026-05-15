@@ -46,7 +46,8 @@ export default function Navbar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0.6rem 1.25rem',
+        padding: '0.6rem 1.5rem',
+        gap: '1rem',
         boxSizing: 'border-box',
 
         // Subtle top highlight
@@ -74,10 +75,10 @@ export default function Navbar() {
         <div className="desktop-nav" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.25rem',                     // tight gap — links are close together
-          position: 'absolute',              // truly centered regardless of logo/CTA width
-          left: '50%',
-          transform: 'translateX(-50%)',
+          justifyContent: 'center',
+          gap: '0.1rem',
+          flex: 1,
+          padding: '0 2rem',
         }}>
           {navLinks.map(link => (
             <a key={link} href={`#${link.toLowerCase()}`} style={{
@@ -86,7 +87,7 @@ export default function Navbar() {
               fontWeight: 500,
               color: 'rgba(255,255,255,0.65)',
               textDecoration: 'none',
-              padding: '0.45rem 0.85rem',
+              padding: '0.45rem 1rem',
               borderRadius: '8px',
               transition: 'color 0.2s, background 0.2s',
               whiteSpace: 'nowrap',
