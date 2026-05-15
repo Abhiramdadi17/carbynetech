@@ -134,7 +134,7 @@ export default function ProofPoints() {
                   fontStyle: 'italic',
                   fontSize: '1.2rem',
                   lineHeight: 1.75,
-                  color: isHovered ? '#1a1a1a' : 'rgba(255,255,255,0.75)',
+                  color: isHovered ? '#000000ff' : 'rgba(255,255,255,0.75)',
                   marginBottom: '1.5rem',
                   transition: 'color 0.3s',
                 }}>
