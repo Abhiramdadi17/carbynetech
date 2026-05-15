@@ -104,17 +104,17 @@ export default function Architecture() {
             >
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '1.2rem',
                 color: '#6b7a90',
-                minWidth: '28px',
+                minWidth: '36px',
                 transition: 'color 0.3s',
               }} className="arch-num">
                 {layer.num}
               </span>
-              <div style={{ flex: '0 0 220px' }}>
+              <div style={{ flex: '0 0 280px' }}>
                 <h3 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '1.05rem',
+                  fontSize: '1.4rem',
                   fontWeight: 700,
                   color: '#4a5568',
                   transition: 'color 0.3s',
@@ -149,9 +149,9 @@ export default function Architecture() {
               key={badge}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
+                fontSize: '0.9rem',
                 color: '#0066cc',
-                padding: '0.5rem 1rem',
+                padding: '0.6rem 1.2rem',
                 border: '1px solid rgba(0,102,204,0.25)',
                 borderRadius: '100px',
                 background: 'rgba(0,102,204,0.05)',
@@ -169,6 +169,8 @@ export default function Architecture() {
           background: rgba(0,0,0,0.03) !important;
           border-color: rgba(0,0,0,0.08) !important;
           color: #6b7a90 !important;
+          font-size: 0.85rem !important;
+          padding: 0.35rem 0.75rem !important;
         }
         .arch-row:hover {
           background: rgba(0,0,0,0.02);
