@@ -210,6 +210,8 @@ export default function Platform() {
   const sectionRef = useRef(null)
   const { ref: inViewRef, inView } = useInView({ threshold: 0.05, triggerOnce: true })
 
+  const LEFT_PAD = 'clamp(1rem, calc((100vw - 1280px) / 2 + 2rem), 8rem)'
+
   useEffect(() => {
     return () => clearTimeout(clickTimeoutRef.current)
   }, [])
@@ -251,15 +253,22 @@ export default function Platform() {
   return (
     <section id="platform" ref={sectionRef} style={{ background: 'var(--bg)', position: 'relative', minHeight: '900vh' }}>
 
-      {/* ── HEADER — normal page flow, scrolls away ── */}
-      <div className="container" style={{ paddingTop: '4rem', paddingBottom: '3rem' }}>
+      {/* ── HEADER ── */}
+      <div style={{
+        paddingTop: '5rem',
+        paddingBottom: '2.5rem',
+        paddingLeft: LEFT_PAD,
+        paddingRight: '2rem',
+        position: 'relative',
+        zIndex: 1,
+      }}>
         <motion.div
           ref={inViewRef}
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <div className="section-label">PLATFORM</div>
+          <div className="section-label">— PLATFORM</div>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
             fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
@@ -267,16 +276,17 @@ export default function Platform() {
             color: 'var(--text)',
             marginBottom: '0.75rem',
             lineHeight: 1.1,
+            maxWidth: '600px',
           }}>
             Six pillars of SFX9 intelligence
           </h2>
           <p style={{
             fontFamily: 'var(--font-body)',
             color: 'var(--text-muted)',
-            maxWidth: '540px',
+            fontSize: '0.95rem',
             lineHeight: 1.6,
+            maxWidth: '480px',
             marginBottom: '0',
-            fontSize: '0.95rem'
           }}>
             Every module is purpose-built to eliminate waste, enforce standards, and surface insights that drive competitive advantage.
           </p>
@@ -308,7 +318,11 @@ export default function Platform() {
               className="platform-left"
               style={{
                 height: 'auto',
-                padding: '1.5rem 2rem 30vh clamp(1rem, calc((100vw - 1280px)/2 + 2rem), 8rem)',
+                alignSelf: 'stretch',
+                paddingTop: '1.5rem',
+                paddingBottom: '30vh',
+                paddingLeft: LEFT_PAD,
+                paddingRight: '2rem',
                 y: leftY,
               }}
             >
