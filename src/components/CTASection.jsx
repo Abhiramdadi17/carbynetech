@@ -3,113 +3,119 @@ import React from 'react'
 export default function CTASection() {
   return (
     <section style={{
-      background: '#E9E9E9',           // light gray — matches screenshot
-      padding: '7rem 2rem 0 2rem',     // no bottom padding — dark card overlaps footer
-      textAlign: 'center',
+      padding: '7rem 0 0 0',             // ← side padding = 0, let card go edge to edge
+      background: '#E9E9E9',
       position: 'relative',
+      overflow: 'hidden',                // ← clips any accidental overflow
     }}>
 
-      {/* Headline */}
-      <h2 style={{
-        fontFamily: 'var(--font-heading)',   // Cormorant
-        fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
-        fontWeight: 400,                     // Cormorant looks best at regular weight large
-        color: '#111111',
-        lineHeight: 1.1,
-        letterSpacing: '-0.02em',
-        marginBottom: '1.5rem',
-        maxWidth: '700px',
-        margin: '0 auto 1.5rem',
-      }}>
-        Transform your<br />manufacturing operations
-      </h2>
-
-      {/* Subtext */}
-      <p style={{
-        fontFamily: 'var(--font-body)',      // Inter
-        fontSize: '0.95rem',
-        color: '#666666',
-        marginBottom: '2.5rem',
-        maxWidth: '480px',
-        margin: '0 auto 2.5rem',
-        lineHeight: 1.6,
-      }}>
-        Drive production efficiency, eliminate paper waste, and accelerate delivery with SFX9 MES.
-      </p>
-
-      {/* Two outlined pill buttons */}
+      {/* Wrap only the headline + buttons in a container div */}
       <div style={{
-        display: 'flex',
-        gap: '1rem',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        marginBottom: '5rem',
+        maxWidth: '700px',
+        margin: '0 auto',
+        textAlign: 'center',
+        padding: '0 2rem 5rem',            // side padding here instead of on section
       }}>
-        <a href="#contact" style={{
-          fontFamily: 'var(--font-ui)',       // Space Grotesk
-          fontSize: '0.72rem',
-          fontWeight: 500,
-          letterSpacing: '0.12em',
+        {/* Headline */}
+        <h2 style={{
+          fontFamily: 'var(--font-heading)',   // Cormorant
+          fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+          fontWeight: 400,                     // Cormorant looks best at regular weight large
           color: '#111111',
-          border: '1px solid #AAAAAA',
-          borderRadius: '100px',
-          padding: '0.75rem 2rem',
-          textDecoration: 'none',
-          background: 'transparent',
-          transition: 'border-color 0.2s, background 0.2s',
-          cursor: 'pointer',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = '#111111'
-          e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = '#AAAAAA'
-          e.currentTarget.style.background = 'transparent'
+          lineHeight: 1.1,
+          letterSpacing: '-0.02em',
+          marginBottom: '1.5rem',
+          maxWidth: '700px',
+          margin: '0 auto 1.5rem',
         }}>
-          CONTACT US
-        </a>
+          Transform your<br />manufacturing operations
+        </h2>
 
-        <a href="#services" style={{
-          fontFamily: 'var(--font-ui)',
-          fontSize: '0.72rem',
-          fontWeight: 500,
-          letterSpacing: '0.12em',
-          color: '#111111',
-          border: '1px solid #AAAAAA',
-          borderRadius: '100px',
-          padding: '0.75rem 2rem',
-          textDecoration: 'none',
-          background: 'transparent',
-          transition: 'border-color 0.2s, background 0.2s',
-          cursor: 'pointer',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = '#111111'
-          e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = '#AAAAAA'
-          e.currentTarget.style.background = 'transparent'
+        {/* Subtext */}
+        <p style={{
+          fontFamily: 'var(--font-body)',      // Inter
+          fontSize: '0.95rem',
+          color: '#666666',
+          marginBottom: '2.5rem',
+          maxWidth: '480px',
+          margin: '0 auto 2.5rem',
+          lineHeight: 1.6,
         }}>
-          EXPLORE MORE
-        </a>
+          Drive production efficiency, eliminate paper waste, and accelerate delivery with SFX9 MES.
+        </p>
+
+        {/* Two outlined pill buttons */}
+        <div style={{
+          display: 'flex',
+          gap: '1rem',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}>
+          <a href="#contact" style={{
+            fontFamily: 'var(--font-ui)',       // Space Grotesk
+            fontSize: '0.72rem',
+            fontWeight: 500,
+            letterSpacing: '0.12em',
+            color: '#111111',
+            border: '1px solid #AAAAAA',
+            borderRadius: '100px',
+            padding: '0.75rem 2rem',
+            textDecoration: 'none',
+            background: 'transparent',
+            transition: 'border-color 0.2s, background 0.2s',
+            cursor: 'pointer',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.borderColor = '#111111'
+            e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.borderColor = '#AAAAAA'
+            e.currentTarget.style.background = 'transparent'
+          }}>
+            CONTACT US
+          </a>
+
+          <a href="#services" style={{
+            fontFamily: 'var(--font-ui)',
+            fontSize: '0.72rem',
+            fontWeight: 500,
+            letterSpacing: '0.12em',
+            color: '#111111',
+            border: '1px solid #AAAAAA',
+            borderRadius: '100px',
+            padding: '0.75rem 2rem',
+            textDecoration: 'none',
+            background: 'transparent',
+            transition: 'border-color 0.2s, background 0.2s',
+            cursor: 'pointer',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.borderColor = '#111111'
+            e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.borderColor = '#AAAAAA'
+            e.currentTarget.style.background = 'transparent'
+          }}>
+            EXPLORE MORE
+          </a>
+        </div>
       </div>
 
       {/* Dark overlapping card — sits at bottom, overlaps footer */}
       <div style={{
-        maxWidth: '1040px',
-        margin: '0 auto',
+        width: '100%',                      // full width — no maxWidth
+        margin: '0',                        // no auto centering
         background: '#1A1A1A',
-        borderRadius: '20px 20px 0 0',      // rounded only on top — merges with footer
-        padding: '3rem 3.5rem',
+        borderRadius: '20px 20px 0 0',      // top corners only
+        padding: '3rem clamp(2rem, 8vw, 6rem)',  // responsive side padding instead
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '2rem',
         flexWrap: 'wrap',
-        position: 'relative',
-        bottom: 0,
+        boxSizing: 'border-box',
       }}>
 
         {/* Left — text */}
