@@ -72,7 +72,7 @@ export default function Navbar() {
             src="/newlogo.png"
             alt="Carbyne Tech"
             style={{
-              height: '40px',
+              height: '50px',
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
@@ -102,14 +102,14 @@ export default function Navbar() {
               transition: 'color 0.2s, background 0.2s',
               whiteSpace: 'nowrap',
             }}
-            onMouseEnter={e => {
-              e.currentTarget.style.color = '#ffffff'
-              e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.color = 'rgba(255,255,255,0.65)'
-              e.currentTarget.style.background = 'transparent'
-            }}>
+              onMouseEnter={e => {
+                e.currentTarget.style.color = '#ffffff'
+                e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.color = 'rgba(255,255,255,0.65)'
+                e.currentTarget.style.background = 'transparent'
+              }}>
               {link}
             </a>
           ))}
@@ -146,14 +146,14 @@ export default function Navbar() {
           transition: 'background 0.2s, transform 0.15s',
           letterSpacing: '0.01em',
         }}
-        onMouseEnter={e => {
-          e.currentTarget.style.background = '#00d4ff'
-          e.currentTarget.style.transform = 'translateY(-1px)'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = '#00c2ff'
-          e.currentTarget.style.transform = 'translateY(0)'
-        }}>
+          onMouseEnter={e => {
+            e.currentTarget.style.background = '#00d4ff'
+            e.currentTarget.style.transform = 'translateY(-1px)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = '#00c2ff'
+            e.currentTarget.style.transform = 'translateY(0)'
+          }}>
           Contact Us
         </button>
 
