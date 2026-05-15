@@ -97,38 +97,45 @@ export default function ProofPoints() {
                   "
                 </div>
 
-                {/* Company + sector */}
-                <div style={{ marginBottom: '1rem' }}>
-                  <span style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    color: isHovered ? '#080a0d' : 'var(--text)',
-                    display: 'block',
-                    transition: 'color 0.3s',
-                  }}>
-                    {t.company}
-                  </span>
-                  <span style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.65rem',
-                    color: isHovered ? 'rgba(0,194,255,0.8)' : 'var(--accent-blue)',
-                    letterSpacing: '0.1em',
-                    transition: 'color 0.3s',
-                  }}>
-                    {t.sector}
-                  </span>
+                {/* Sector */}
+                <div style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.65rem',
+                  color: isHovered ? '#008bbf' : 'var(--accent-blue)',
+                  fontWeight: 500,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  background: isHovered ? 'rgba(0,194,255,0.12)' : 'rgba(0,194,255,0.07)',
+                  border: isHovered ? '1px solid rgba(0,194,255,0.3)' : '1px solid rgba(0,194,255,0.2)',
+                  borderRadius: '4px',
+                  padding: '3px 10px',
+                  display: 'inline-block',
+                  marginBottom: '0.75rem',
+                  transition: 'all 0.3s',
+                }}>
+                  {t.sector}
+                </div>
+
+                {/* Company */}
+                <div style={{
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  color: isHovered ? '#080a0d' : 'var(--text)',
+                  marginBottom: '1rem',
+                  transition: 'color 0.3s',
+                }}>
+                  {t.company}
                 </div>
 
                 {/* Quote */}
                 <p style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '1.1rem',
-                  fontWeight: 400,
-                  color: isHovered ? '#1a1a1a' : 'var(--text-muted)',
-                  lineHeight: 1.7,
-                  marginBottom: '1.5rem',
                   fontStyle: 'italic',
+                  fontSize: '1rem',
+                  lineHeight: 1.7,
+                  color: isHovered ? '#1a1a1a' : 'rgba(255,255,255,0.75)',
+                  marginBottom: '1.5rem',
                   transition: 'color 0.3s',
                 }}>
                   {t.quote}
