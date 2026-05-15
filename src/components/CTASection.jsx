@@ -28,7 +28,7 @@ export default function CTASection() {
           maxWidth: '700px',
           margin: '0 auto 1.5rem',
         }}>
-          Transform your<br />manufacturing operations
+          Transform your manufacturing operations
         </h2>
 
         {/* Subtext */}
@@ -65,14 +65,14 @@ export default function CTASection() {
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
           }}
-          onMouseEnter={e => {
-            e.currentTarget.style.borderColor = '#111111'
-            e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.borderColor = '#AAAAAA'
-            e.currentTarget.style.background = 'transparent'
-          }}>
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = '#111111'
+              e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = '#AAAAAA'
+              e.currentTarget.style.background = 'transparent'
+            }}>
             CONTACT US
           </a>
 
@@ -90,14 +90,14 @@ export default function CTASection() {
             transition: 'border-color 0.2s, background 0.2s',
             cursor: 'pointer',
           }}
-          onMouseEnter={e => {
-            e.currentTarget.style.borderColor = '#111111'
-            e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.borderColor = '#AAAAAA'
-            e.currentTarget.style.background = 'transparent'
-          }}>
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = '#111111'
+              e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = '#AAAAAA'
+              e.currentTarget.style.background = 'transparent'
+            }}>
             EXPLORE MORE
           </a>
         </div>
@@ -168,8 +168,8 @@ export default function CTASection() {
             transition: 'background 0.2s, transform 0.2s',
             whiteSpace: 'nowrap',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#F0F0F0'}
-          onMouseLeave={e => e.currentTarget.style.background = '#FFFFFF'}
+            onMouseEnter={e => e.currentTarget.style.background = '#F0F0F0'}
+            onMouseLeave={e => e.currentTarget.style.background = '#FFFFFF'}
           >
             Book a Consultant
           </button>
@@ -187,8 +187,8 @@ export default function CTASection() {
             transition: 'color 0.2s',
             whiteSpace: 'nowrap',
           }}
-          onMouseEnter={e => e.currentTarget.style.color = '#FFFFFF'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+            onMouseEnter={e => e.currentTarget.style.color = '#FFFFFF'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
           >
             Explorer Services ↗
           </a>

@@ -148,7 +148,7 @@ export default function Industries() {
           <p style={{
             fontFamily: 'var(--font-body)',
             color: 'var(--text-muted)',
-            maxWidth: '540px',
+            maxWidth: '940px',
             lineHeight: 1.7,
           }}>
             Not a generic MES. Every deployment is tailored to your exact process flows, compliance requirements, and ERP protocols.

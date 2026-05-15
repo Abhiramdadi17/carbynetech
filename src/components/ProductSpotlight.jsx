@@ -106,7 +106,7 @@ export default function ProductSpotlight() {
             fontFamily: 'var(--font-body)',
             color: 'var(--text-muted)',
             fontSize: '1.05rem',
-            maxWidth: '520px',
+            maxWidth: '920px',
             lineHeight: 1.7,
           }}>
             SFX9 is not a point solution. It is a complete manufacturing intelligence layer — integrating every discipline, every role, every data source into a single unified view.

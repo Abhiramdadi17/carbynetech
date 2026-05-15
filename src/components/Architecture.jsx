@@ -79,7 +79,7 @@ export default function Architecture() {
             fontFamily: 'var(--font-body)',
             fontSize: '1.1rem',
             color: '#6B7280',
-            maxWidth: '520px',
+            maxWidth: '1120px',
             lineHeight: 1.7,
           }}>
             Five connected layers from machine I/O to enterprise ERP — designed for seamless integration into your existing technology landscape.
