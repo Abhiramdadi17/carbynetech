@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap } from 'lucide-react'
 
@@ -11,65 +11,6 @@ const stats = [
 ]
 
 export default function Hero() {
-  const canvasRef = useRef(null)
-
-  // Animated particle dot field
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let animId
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    const dots = Array.from({ length: 80 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.4 + 0.1,
-    }))
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      dots.forEach(d => {
-        d.x += d.vx
-        d.y += d.vy
-        if (d.x < 0 || d.x > canvas.width) d.vx *= -1
-        if (d.y < 0 || d.y > canvas.height) d.vy *= -1
-        ctx.beginPath()
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 194, 255, ${d.opacity})`
-        ctx.fill()
-      })
-      // Draw connections
-      dots.forEach((d1, i) => {
-        dots.slice(i + 1).forEach(d2 => {
-          const dist = Math.hypot(d1.x - d2.x, d1.y - d2.y)
-          if (dist < 120) {
-            ctx.beginPath()
-            ctx.moveTo(d1.x, d1.y)
-            ctx.lineTo(d2.x, d2.y)
-            ctx.strokeStyle = `rgba(0, 194, 255, ${0.07 * (1 - dist / 120)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        })
-      })
-      animId = requestAnimationFrame(draw)
-    }
-    draw()
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
 
   return (
     <section style={{
@@ -82,35 +23,52 @@ export default function Hero() {
       padding: '0',
       textAlign: 'left',
     }}>
-      {/* Grid background */}
-      <div className="grid-bg" />
-
-      {/* Particle canvas */}
-      <canvas
-        ref={canvasRef}
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
           height: '100%',
-          pointerEvents: 'none',
+          objectFit: 'cover',
+          objectPosition: 'center right',
           zIndex: 0,
+          opacity: 0.42,
         }}
-      />
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-      {/* Radial glow */}
+      {/* Gradient overlay */}
       <div style={{
         position: 'absolute',
-        top: '20%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '80vw',
-        height: '60vh',
-        background: 'radial-gradient(ellipse, rgba(0,194,255,0.06) 0%, transparent 70%)',
+        inset: 0,
+        zIndex: 1,
         pointerEvents: 'none',
-        zIndex: 0,
+        background: `
+          linear-gradient(
+            to right,
+            rgba(8,10,13,0.95) 0%,
+            rgba(8,10,13,0.80) 35%,
+            rgba(8,10,13,0.40) 65%,
+            rgba(8,10,13,0.15) 100%
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(8,10,13,0.60) 0%,
+            rgba(8,10,13,0.00) 25%,
+            rgba(8,10,13,0.00) 70%,
+            rgba(8,10,13,0.90) 100%
+          )
+        `,
       }} />
 
+      <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
       <div className="container" style={{
         position: 'relative',
         zIndex: 1,
@@ -245,6 +203,7 @@ export default function Hero() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
       </div>
 
       {/* Bottom fade */}
