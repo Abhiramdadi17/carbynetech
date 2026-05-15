@@ -32,8 +32,7 @@ export default function Navbar() {
         top: '16px',                          // floats 16px from top — not flush
         left: '50%',
         transform: 'translateX(-50%)',
-        width: 'calc(100% - 3rem)',           // side breathing room
-        maxWidth: '1100px',                   // never wider than this
+        width: 'min(calc(100% - 2rem), 1280px)',   // single clean rule
         zIndex: 1000,
 
         // Glassmorphism pill
@@ -162,8 +161,7 @@ export default function Navbar() {
               top: '80px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: 'calc(100% - 3rem)',
-              maxWidth: '1100px',
+              width: 'min(calc(100% - 2rem), 1280px)',
               background: 'rgba(8,10,13,0.98)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255,255,255,0.08)',
