@@ -41,7 +41,11 @@ export default function Architecture() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
   return (
-    <section className="section" style={{ background: '#f5f5f0' }}>
+    <section className="section" style={{
+      background: '#F7F6F2',
+      backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(26,31,46,0.04) 1px, transparent 0)',
+      backgroundSize: '32px 32px'
+    }}>
       <div className="container">
         <motion.div
           ref={ref}
@@ -53,8 +57,8 @@ export default function Architecture() {
           <div style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.7rem',
-            letterSpacing: '0.2em',
-            color: '#6b7a90',
+            letterSpacing: '0.18em',
+            color: '#1D4ED8',
             textTransform: 'uppercase',
             marginBottom: '1rem',
           }}>
@@ -64,7 +68,7 @@ export default function Architecture() {
             fontFamily: 'var(--font-heading)',
             fontSize: 'clamp(2.2rem, 5vw, 4rem)',
             fontWeight: 800,
-            color: '#080a0d',
+            color: '#1A1F2E',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
             marginBottom: '1rem',
@@ -74,7 +78,7 @@ export default function Architecture() {
           <p style={{
             fontFamily: 'var(--font-body)',
             fontSize: '1.1rem',
-            color: '#4a5568',
+            color: '#6B7280',
             maxWidth: '520px',
             lineHeight: 1.7,
           }}>
@@ -95,29 +99,31 @@ export default function Architecture() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '2rem',
-                padding: '1.75rem 1.5rem',
-                borderTop: '1px solid rgba(0,0,0,0.06)',
+                padding: '1.5rem 0',
+                borderTop: '1px solid #DDD9D3',
                 borderLeft: '3px solid transparent',
+                background: 'transparent',
                 cursor: 'default',
-                transition: 'background 0.3s, border-left-color 0.3s',
+                transition: 'all 0.25s ease',
               }}
             >
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '1.2rem',
-                color: '#6b7a90',
+                fontSize: '0.72rem',
+                fontWeight: '500',
+                color: '#1D4ED8',
                 minWidth: '36px',
-                transition: 'color 0.3s',
+                transition: 'color 0.25s',
               }} className="arch-num">
                 {layer.num}
               </span>
               <div style={{ flex: '0 0 280px' }}>
                 <h3 style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '1.4rem',
-                  fontWeight: 700,
-                  color: '#4a5568',
-                  transition: 'color 0.3s',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: '#1A1F2E',
+                  transition: 'color 0.25s',
                 }} className="arch-name">
                   {layer.name}
                 </h3>
@@ -129,7 +135,7 @@ export default function Architecture() {
               </div>
             </motion.div>
           ))}
-          <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }} />
+          <div style={{ height: '1px', background: '#DDD9D3' }} />
         </div>
 
         {/* Bottom badges */}
@@ -149,16 +155,16 @@ export default function Architecture() {
               key={badge}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.9rem',
-                color: '#0066cc',
-                padding: '0.6rem 1.2rem',
-                border: '1px solid rgba(0,102,204,0.25)',
+                fontSize: '0.68rem',
+                color: '#F7F6F2',
+                padding: '0.45rem 1.1rem',
+                border: 'none',
                 borderRadius: '100px',
-                background: 'rgba(0,102,204,0.05)',
-                letterSpacing: '0.05em',
+                background: '#1A1F2E',
+                letterSpacing: '0.1em',
               }}
             >
-              ✓ {badge}
+              <span style={{ color: '#1D4ED8', marginRight: '0.3rem' }}>✓</span> {badge}
             </div>
           ))}
         </motion.div>
@@ -166,26 +172,24 @@ export default function Architecture() {
 
       <style>{`
         .arch-tag {
-          background: rgba(0,0,0,0.03) !important;
-          border-color: rgba(0,0,0,0.08) !important;
-          color: #6b7a90 !important;
-          font-size: 0.85rem !important;
-          padding: 0.35rem 0.75rem !important;
+          background: #EFF6FF !important;
+          border: 1px solid #BFDBFE !important;
+          color: #1D4ED8 !important;
+          font-family: var(--font-mono) !important;
+          font-size: 0.62rem !important;
+          letter-spacing: 0.1em !important;
+          border-radius: 4px !important;
+          padding: 3px 10px !important;
+          transition: all 0.25s ease !important;
         }
         .arch-row:hover {
-          background: rgba(0,0,0,0.02);
-          border-left-color: #0066cc !important;
-        }
-        .arch-row:hover .arch-num {
-          color: #0066cc !important;
-        }
-        .arch-row:hover .arch-name {
-          color: #080a0d !important;
+          background: #EEECEA !important;
+          border-left-color: #1D4ED8 !important;
+          padding-left: 1rem !important;
         }
         .arch-row:hover .arch-tag {
-          border-color: rgba(0,102,204,0.35) !important;
-          color: #0066cc !important;
-          background: rgba(0,102,204,0.07) !important;
+          background: #DBEAFE !important;
+          border-color: #93C5FD !important;
         }
       `}</style>
     </section>
