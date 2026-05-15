@@ -169,7 +169,7 @@ export default function Hero() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}>
+            }}><br />
               shop floor
             </span>
             {' '}platform
