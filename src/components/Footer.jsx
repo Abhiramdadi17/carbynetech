@@ -22,8 +22,8 @@ export default function Footer() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
   return (
-    <footer style={{ background: '#060810', borderTop: '1px solid var(--border)' }}>
-      <div className="container" style={{ paddingTop: '8rem', paddingBottom: '3rem' }}>
+    <footer style={{ background: '#060810', borderTop: '1px solid var(--border)', paddingTop: '110px' }}>
+      <div className="container" style={{ paddingBottom: '3rem' }}>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}

@@ -5,6 +5,7 @@ export default function CTASection() {
     <section style={{
       background: '#E9E9E9',
       padding: '7rem 2rem 0 2rem',
+      paddingBottom: '70px',
       position: 'relative',
     }}>
 
@@ -102,23 +103,25 @@ export default function CTASection() {
         </div>
       </div>
 
-      {/* Floating card — overlaps footer using negative margin */}
+      {/* Card — absolutely positioned at the bottom edge of this section */}
       <div style={{
-        maxWidth: '1100px',              // constrained width — NOT full width
-        margin: '0 auto',               // centered
-        marginBottom: '-80px',          // ← THIS pulls it down into the footer
-        position: 'relative',
-        zIndex: 10,                     // sits above both section and footer
+        position: 'absolute',
+        bottom: '-70px',               // ← half its height, pulls it down to straddle boundary
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: 'calc(100% - 4rem)',    // full width minus side margins
+        maxWidth: '1100px',
+        zIndex: 10,
         background: '#1A1A1A',
-        borderRadius: '20px',           // ALL corners rounded — it's a floating card
-        padding: '3rem 3.5rem',
+        borderRadius: '20px',
+        padding: '2.5rem 3.5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '2rem',
         flexWrap: 'wrap',
         boxSizing: 'border-box',
-        boxShadow: '0 40px 80px rgba(0,0,0,0.25)',  // shadow makes it feel elevated
+        boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
       }}>
 
         {/* Left — text */}
