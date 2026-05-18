@@ -8,7 +8,7 @@ export default function CTASection() {
     <section style={{
       background: '#E9E9E9',
       padding: isMobile ? '4rem 1.25rem 0 1.25rem' : '7rem 2rem 0 2rem',
-      paddingBottom: '70px',
+      paddingBottom: isMobile ? '0' : '70px',
       position: 'relative',
     }}>
 

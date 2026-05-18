@@ -70,7 +70,7 @@ export default function ProductSpotlight() {
             borderRadius: '100px',
             padding: '0.35rem 1rem',
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.68rem',
+            fontSize: '0.72rem',
             color: 'var(--accent-blue)',
             letterSpacing: '0.12em',
             marginBottom: '1.5rem',

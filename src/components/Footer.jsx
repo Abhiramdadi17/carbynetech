@@ -108,7 +108,7 @@ export default function Footer() {
               <div key={title}>
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.65rem',
+                  fontSize: '0.72rem',
                   letterSpacing: '0.15em',
                   color: 'var(--text-muted)',
                   textTransform: 'uppercase',

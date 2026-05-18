@@ -83,7 +83,7 @@ function DashboardViz({ pillar }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
+            fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
             color: 'var(--text-muted)', letterSpacing: '0.18em', marginBottom: '4px',
           }}>
             SFX9 · LIVE DASHBOARD
@@ -96,7 +96,7 @@ function DashboardViz({ pillar }) {
           </div>
         </div>
         <div style={{
-          fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+          fontFamily: 'var(--font-mono)', fontSize: '0.7rem',
           color: color, padding: '3px 10px',
           border: `1px solid ${color}44`, borderRadius: '4px',
           display: 'flex', alignItems: 'center', gap: '6px',
@@ -143,7 +143,7 @@ function DashboardViz({ pillar }) {
       {/* Bar chart */}
       <div>
         <div style={{
-          fontFamily: 'var(--font-mono)', fontSize: '0.58rem',
+          fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
           color: 'var(--text-muted)', marginBottom: '0.5rem',
           letterSpacing: '0.12em',
         }}>
@@ -177,8 +177,8 @@ function DashboardViz({ pillar }) {
         }}>
           {['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7'].map(s => (
             <span key={s} style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.52rem',
-              color: 'rgba(107,122,144,0.6)',
+              fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
+              color: 'var(--text-muted)',
             }}>{s}</span>
           ))}
         </div>
@@ -188,7 +188,7 @@ function DashboardViz({ pillar }) {
       <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: 'auto' }}>
         {tags.map(tag => (
           <span key={tag} style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.58rem',
+            fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
             padding: '3px 8px',
             border: `1px solid ${color}30`,
             borderRadius: '3px',
@@ -313,7 +313,7 @@ export default function Platform() {
             >
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.65rem',
+                fontSize: '0.7rem',
                 color: i === activePillar ? 'var(--accent-blue)' : 'var(--text-muted)',
                 marginBottom: '0.3rem',
               }}>

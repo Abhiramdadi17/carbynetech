@@ -117,7 +117,7 @@ function KPIPanel({ kpi }) {
       {/* KPI label */}
       <div style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '0.68rem',
+        fontSize: '0.72rem',
         color: 'var(--text-muted)',
         letterSpacing: '0.14em',
         textTransform: 'uppercase',
@@ -151,13 +151,13 @@ function KPIPanel({ kpi }) {
         }}>
           <span style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.6rem',
+            fontSize: '0.68rem',
             color: 'var(--text-muted)',
             letterSpacing: '0.12em',
           }}>TREND — LAST 9 SHIFTS</span>
           <span style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.6rem',
+            fontSize: '0.68rem',
             color: kpi.color,
             letterSpacing: '0.05em',
           }}>↑ IMPROVING</span>
@@ -188,7 +188,7 @@ function KPIPanel({ kpi }) {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
           {['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'].map(s => (
-            <span key={s} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.52rem', color: 'var(--text-muted)' }}>{s}</span>
+            <span key={s} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-muted)' }}>{s}</span>
           ))}
         </div>
       </div>

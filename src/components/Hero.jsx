@@ -118,7 +118,7 @@ export default function Hero() {
           {/* Main headline */}
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: isMobile ? 'clamp(2rem, 7.5vw, 2.6rem)' : 'clamp(5rem, 10vw, 9rem)',
+            fontSize: isMobile ? 'clamp(3rem, 11vw, 3.8rem)' : 'clamp(5rem, 10vw, 9rem)',
             fontWeight: 700,
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
@@ -153,10 +153,10 @@ export default function Hero() {
           <div style={{
             display: 'flex',
             flexDirection: isMobile ? 'column' : 'row',
+            alignItems: 'flex-start',
             gap: '1rem',
             flexWrap: 'wrap',
             marginBottom: '4rem',
-            width: isMobile ? '100%' : 'auto',
           }}>
             <a
               href="#cta"
@@ -164,9 +164,6 @@ export default function Hero() {
               style={{
                 fontSize: '0.9rem',
                 padding: '0.8rem 1.8rem',
-                width: isMobile ? '100%' : 'auto',
-                maxWidth: isMobile ? '320px' : 'none',
-                justifyContent: 'center',
               }}
             >
               Book a Demo <ArrowRight size={16} />
@@ -177,9 +174,6 @@ export default function Hero() {
               style={{
                 fontSize: '0.9rem',
                 padding: '0.8rem 1.8rem',
-                width: isMobile ? '100%' : 'auto',
-                maxWidth: isMobile ? '320px' : 'none',
-                justifyContent: 'center',
               }}
             >
               Explore Platform

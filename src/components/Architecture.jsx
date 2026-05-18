@@ -214,7 +214,7 @@ export default function Architecture() {
           border: 1px solid #BFDBFE !important;
           color: #1D4ED8 !important;
           font-family: var(--font-mono) !important;
-          font-size: 0.62rem !important;
+          font-size: 0.7rem !important;
           letter-spacing: 0.1em !important;
           border-radius: 4px !important;
           padding: 3px 10px !important;

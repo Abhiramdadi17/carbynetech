@@ -102,7 +102,7 @@ export default function ProofPoints() {
                 {/* Sector */}
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.65rem',
+                  fontSize: '0.72rem',
                   color: isHovered ? '#008bbf' : 'var(--accent-blue)',
                   fontWeight: 500,
                   letterSpacing: '0.14em',

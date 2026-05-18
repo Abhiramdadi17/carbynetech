@@ -86,7 +86,7 @@ h3 {
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -152,7 +152,7 @@ h3 {
    ============================================================ */
 .tag {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: 0.08em;
   padding: 0.22rem 0.6rem;
   border-radius: 4px;
