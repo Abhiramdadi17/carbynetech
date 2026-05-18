@@ -40,7 +40,7 @@ export default function Navbar() {
         transform: 'none',
         width: 'auto',
         maxWidth: 'none',
-        zIndex: 1000,
+        zIndex: 1002,
 
         // Glassmorphism pill
         background: 'rgba(8, 10, 13, 0.75)',
@@ -123,10 +123,10 @@ export default function Navbar() {
           </div>
         )}
 
-        {/* Mobile hamburger — only on mobile */}
+        {/* Mobile hamburger / close toggle — only on mobile */}
         {isMobile && (
           <button
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setMenuOpen(prev => !prev)}
             style={{
               background: 'none',
               border: 'none',
@@ -135,10 +135,12 @@ export default function Navbar() {
               display: 'flex',
               alignItems: 'center',
               padding: '4px',
+              zIndex: 1002,
+              position: 'relative',
             }}
-            aria-label="Open menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <Menu size={22} />
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         )}
 
@@ -183,7 +185,7 @@ export default function Navbar() {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 999,
+              zIndex: 1001,
               background: 'rgba(8,10,13,0.98)',
               backdropFilter: 'blur(20px)',
               display: 'flex',
@@ -193,22 +195,6 @@ export default function Navbar() {
               gap: '0',
             }}
           >
-            <button
-              onClick={() => setMenuOpen(false)}
-              style={{
-                position: 'absolute',
-                top: '1.5rem',
-                right: '1.5rem',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text)',
-              }}
-              aria-label="Close menu"
-            >
-              <X size={24} />
-            </button>
-
             {['Services', 'Products', 'Insights & Events', 'Culture', 'Careers'].map(link => (
               <a
                 key={link}

@@ -108,38 +108,78 @@ export default function CommonThread() {
         </motion.div>
 
         {/* Tab bar */}
-        <div style={{
-          display: 'flex',
-          gap: 0,
-          borderBottom: '1px solid var(--border)',
-          marginBottom: 0,
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-        }}>
-          {tabs.map((t, i) => (
-            <button
-              key={t.id}
-              onClick={() => handleTab(i)}
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.875rem',
-                padding: '1rem 1.5rem',
-                background: 'none',
-                border: 'none',
-                borderBottom: activeTab === i ? `2px solid var(--accent-blue)` : '2px solid transparent',
-                color: activeTab === i ? 'var(--text)' : 'var(--text-muted)',
-                cursor: 'pointer',
-                transition: 'color 0.2s, border-color 0.2s',
-                whiteSpace: 'nowrap',
-                fontWeight: activeTab === i ? 600 : 400,
-                flexShrink: isMobile ? 0 : 1,
-              }}
-            >
-              {t.label}
-            </button>
-          ))}
+        <div style={{ position: 'relative' }}>
+          <div style={{
+            display: 'flex',
+            gap: 0,
+            borderBottom: '1px solid var(--border)',
+            marginBottom: 0,
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+          }}>
+            {tabs.map((t, i) => (
+              <button
+                key={t.id}
+                onClick={() => handleTab(i)}
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.875rem',
+                  padding: '1rem 1.5rem',
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: activeTab === i ? `2px solid var(--accent-blue)` : '2px solid transparent',
+                  color: activeTab === i ? 'var(--text)' : 'var(--text-muted)',
+                  cursor: 'pointer',
+                  transition: 'color 0.2s, border-color 0.2s',
+                  whiteSpace: 'nowrap',
+                  fontWeight: activeTab === i ? 600 : 400,
+                  flexShrink: isMobile ? 0 : 1,
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          {isMobile && (
+            <div style={{
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              bottom: '1px',
+              width: '56px',
+              background: 'linear-gradient(to right, transparent, var(--bg-card))',
+              pointerEvents: 'none',
+            }} />
+          )}
         </div>
+
+        {/* Dot indicators — mobile only */}
+        {isMobile && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '10px 0 6px',
+          }}>
+            {tabs.map((_, i) => (
+              <div
+                key={i}
+                onClick={() => handleTab(i)}
+                style={{
+                  width: activeTab === i ? '18px' : '6px',
+                  height: '6px',
+                  borderRadius: '3px',
+                  background: activeTab === i ? 'var(--accent-blue)' : 'rgba(255,255,255,0.18)',
+                  cursor: 'pointer',
+                  transition: 'width 0.3s, background 0.3s',
+                  flexShrink: 0,
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Content panel — fixed height to prevent layout shift */}
         <div style={{

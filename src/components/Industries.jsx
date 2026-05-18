@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { ArrowRight } from 'lucide-react'
+
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const industries = [
@@ -119,32 +119,6 @@ function IndustryRow({ industry, index }) {
         </div>
       )}
 
-      {/* CTA */}
-      <motion.button
-        animate={hovered ? { x: 0, opacity: 1 } : { x: 4, opacity: 0.4 }}
-        transition={{ duration: 0.2 }}
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.72rem',
-          color: hovered ? 'var(--accent-blue)' : 'var(--text-muted)',
-          background: 'transparent',
-          border: `1px solid ${hovered ? 'var(--accent-blue)' : 'var(--border)'}`,
-          borderRadius: '4px',
-          padding: '0.4rem 0.9rem',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.4rem',
-          whiteSpace: 'nowrap',
-          transition: 'border-color 0.3s, color 0.3s, box-shadow 0.3s',
-          boxShadow: hovered ? '0 0 15px rgba(0,194,255,0.2)' : 'none',
-          width: isMobile ? '100%' : 'auto',
-          justifyContent: isMobile ? 'center' : 'flex-start',
-          marginTop: isMobile ? '0.75rem' : 0,
-        }}
-      >
-        Configure Solution <ArrowRight size={12} />
-      </motion.button>
     </motion.div>
   )
 }

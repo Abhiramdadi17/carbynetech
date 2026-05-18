@@ -99,9 +99,9 @@ export default function Architecture() {
               className="arch-row"
               style={{
                 display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
                 alignItems: isMobile ? 'flex-start' : 'center',
-                flexWrap: isMobile ? 'wrap' : 'nowrap',
-                gap: '2rem',
+                gap: isMobile ? '0.5rem' : '2rem',
                 padding: '1.5rem 0',
                 borderTop: '1px solid #DDD9D3',
                 borderLeft: '3px solid transparent',
@@ -110,39 +110,66 @@ export default function Architecture() {
                 transition: 'all 0.25s ease',
               }}
             >
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                fontWeight: '500',
-                color: '#1D4ED8',
-                minWidth: '36px',
-                transition: 'color 0.25s',
-              }} className="arch-num">
-                {layer.num}
-              </span>
-              <div style={{ flex: isMobile ? '1 1 auto' : '0 0 280px' }}>
-                <h3 style={{
-                  fontFamily: 'var(--font-ui)',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: '#1A1F2E',
-                  transition: 'color 0.25s',
-                }} className="arch-name">
-                  {layer.name}
-                </h3>
-              </div>
-              <div style={{
-                flex: 1,
-                display: 'flex',
-                gap: '0.4rem',
-                flexWrap: 'wrap',
-                width: isMobile ? '100%' : 'auto',
-                marginTop: isMobile ? '0.5rem' : 0,
-              }}>
-                {layer.tags.map(tag => (
-                  <span key={tag} className="tag arch-tag">{tag}</span>
-                ))}
-              </div>
+              {isMobile ? (
+                // Mobile: num + name on one line, tags below
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      fontWeight: '500',
+                      color: '#1D4ED8',
+                      flexShrink: 0,
+                    }} className="arch-num">
+                      {layer.num}
+                    </span>
+                    <h3 style={{
+                      fontFamily: 'var(--font-ui)',
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      color: '#1A1F2E',
+                      margin: 0,
+                    }} className="arch-name">
+                      {layer.name}
+                    </h3>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                    {layer.tags.map(tag => (
+                      <span key={tag} className="tag arch-tag">{tag}</span>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                // Desktop: unchanged flat 3-column row
+                <>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.72rem',
+                    fontWeight: '500',
+                    color: '#1D4ED8',
+                    minWidth: '36px',
+                    transition: 'color 0.25s',
+                  }} className="arch-num">
+                    {layer.num}
+                  </span>
+                  <div style={{ flex: '0 0 280px' }}>
+                    <h3 style={{
+                      fontFamily: 'var(--font-ui)',
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      color: '#1A1F2E',
+                      transition: 'color 0.25s',
+                    }} className="arch-name">
+                      {layer.name}
+                    </h3>
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                    {layer.tags.map(tag => (
+                      <span key={tag} className="tag arch-tag">{tag}</span>
+                    ))}
+                  </div>
+                </>
+              )}
             </motion.div>
           ))}
           <div style={{ height: '1px', background: '#DDD9D3' }} />
